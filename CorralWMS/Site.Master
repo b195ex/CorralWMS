@@ -1,20 +1,15 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="CorralWMS.SiteMaster" %>
-
 <!DOCTYPE html>
-
 <html lang="en">
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> - Lynx WMS</title>
-
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
-
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
 </head>
 <body>
     <form runat="server">
@@ -39,9 +34,8 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
-
         <div class="navbar navbar-inverse navbar-static-top">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
@@ -52,6 +46,10 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
+                        <li><asp:HyperLink ID="AppSettingsNavLink" runat="server" NavigateUrl="~/AppAdministration/ManageSettings.aspx" OnLoad="Control_Load" reqperm="10">Configuraciones</asp:HyperLink></li>
+                        <li><asp:HyperLink ID="ManageUsersNavLink" runat="server" NavigateUrl="~/AppAdministration/ManageUsers.aspx" OnLoad="Control_Load" reqperm="8">Gestión de Usuarios</asp:HyperLink></li>
+                        <li><asp:HyperLink ID="ManageRolesNavLink" runat="server" NavigateUrl="~/AppAdministration/ManageRoles.aspx" OnLoad="Control_Load" reqperm="9">Gestión de Roles</asp:HyperLink></li>
+                        <li><asp:HyperLink ID="ManagePermissions" runat="server" NavigateUrl="~/AppAdministration/ManagePermissions.aspx" OnLoad="Control_Load" reqperm="7">Gestión de Permisos</asp:HyperLink></li>
                         <li><a runat="server" href="~/">Home</a></li>
                         <li><a runat="server" href="~/About">About</a></li>
                         <li><a runat="server" href="~/Contact">Contact</a></li>
@@ -60,14 +58,20 @@
             </div>
         </div>
         <div class="container body-content">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server">
-            </asp:ContentPlaceHolder>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h1 class="panel-title"><%: Page.Title %></h1>
+                </div>
+                <div class="panel-body">
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
             <hr />
             <footer>
                 <p>&copy; <%: DateTime.Now.Year %> - Lynx Consulting</p>
             </footer>
         </div>
-
     </form>
 </body>
 </html>

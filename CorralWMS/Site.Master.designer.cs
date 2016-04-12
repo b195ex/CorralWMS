@@ -13,6 +13,42 @@ namespace CorralWMS {
     public partial class SiteMaster {
         
         /// <summary>
+        /// AppSettingsNavLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink AppSettingsNavLink;
+        
+        /// <summary>
+        /// ManageUsersNavLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink ManageUsersNavLink;
+        
+        /// <summary>
+        /// ManageRolesNavLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink ManageRolesNavLink;
+        
+        /// <summary>
+        /// ManagePermissions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink ManagePermissions;
+        
+        /// <summary>
         /// MainContent control.
         /// </summary>
         /// <remarks>

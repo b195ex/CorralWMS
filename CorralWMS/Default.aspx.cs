@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CorralWMS.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,10 @@ namespace CorralWMS
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            using (var ctx = new LWMS_Context())
+            {
+                Label1.Text = ctx.Database.Connection.ConnectionString;
+            }
         }
     }
 }
