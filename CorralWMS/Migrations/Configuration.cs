@@ -28,14 +28,14 @@ namespace CorralWMS.Migrations
             //    );
             //
             context.SapSettings.AddOrUpdate(p => p.id, new SapSetting(){
-                CompanyDB = "CompanyDB",
-                DbPassword = "DbPassword",
-                DbServerType = SAPbobsCOM.BoDataServerTypes.dst_MSSQL2014,
+                CompanyDB = "SBO_DEMOCR",
+                DbPassword = "On3S0lu10ns",
+                DbServerType = SAPbobsCOM.BoDataServerTypes.dst_MSSQL2012,
                 DbUserName = "sa",
                 id = 1,
                 language = SAPbobsCOM.BoSuppLangs.ln_English,
-                Password = "Password",
-                Server = "Server",
+                Password = "manager",
+                Server = "HNAPP01",
                 UserName = "manager",
                 UseTrusted = false
             });

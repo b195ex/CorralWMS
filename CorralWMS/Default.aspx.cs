@@ -12,6 +12,8 @@ namespace CorralWMS
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["LoggedInUser"] == null)
+                Response.Redirect("~/SignIn.aspx");
             using (var ctx = new LWMS_Context())
             {
                 Label1.Text = ctx.Database.Connection.ConnectionString;

@@ -119,6 +119,7 @@
     <Content Include="About.aspx" />
     <Content Include="AppAdministration\ManagePermissions.aspx" />
     <Content Include="AppAdministration\ManageRoles.aspx" />
+    <Content Include="AppAdministration\ManageSAP.aspx" />
     <Content Include="AppAdministration\ManageSettings.aspx" />
     <Content Include="AppAdministration\ManageUsers.aspx" />
     <Content Include="Contact.aspx" />
@@ -245,6 +246,13 @@
     </Compile>
     <Compile Include="AppAdministration\ManageRoles.aspx.designer.cs">
       <DependentUpon>ManageRoles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AppAdministration\ManageSAP.aspx.cs">
+      <DependentUpon>ManageSAP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AppAdministration\ManageSAP.aspx.designer.cs">
+      <DependentUpon>ManageSAP.aspx</DependentUpon>
     </Compile>
     <Compile Include="AppAdministration\ManageSettings.aspx.cs">
       <DependentUpon>ManageSettings.aspx</DependentUpon>

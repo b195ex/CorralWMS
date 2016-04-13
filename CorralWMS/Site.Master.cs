@@ -29,5 +29,13 @@ namespace CorralWMS
             if (perm_req == null)
                 control.Visible = false;
         }
+
+        protected void LogoutLinkBtn_Click(object sender, EventArgs e)
+        {
+            Session.Remove("LoggedinUser");
+            Session.Remove("Permissions");
+            Session.Abandon();
+            Response.Redirect("~/SignIn.aspx");
+        }
     }
 }

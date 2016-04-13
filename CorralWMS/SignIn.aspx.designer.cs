@@ -10,69 +10,78 @@
 namespace CorralWMS {
     
     
-    public partial class SiteMaster {
+    public partial class SignIn {
         
         /// <summary>
-        /// AppSettingsNavLink control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink AppSettingsNavLink;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// ManageSAP control.
+        /// inputEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink ManageSAP;
+        protected global::System.Web.UI.WebControls.TextBox inputEmail;
         
         /// <summary>
-        /// ManageUsersNavLink control.
+        /// inputPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink ManageUsersNavLink;
+        protected global::System.Web.UI.WebControls.TextBox inputPassword;
         
         /// <summary>
-        /// ManageRolesNavLink control.
+        /// Button1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink ManageRolesNavLink;
+        protected global::System.Web.UI.WebControls.Button Button1;
         
         /// <summary>
-        /// ManagePermissions control.
+        /// SignInFailed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink ManagePermissions;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl SignInFailed;
         
         /// <summary>
-        /// LogoutLinkBtn control.
+        /// CloseFailAlert control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LogoutLinkBtn;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CloseFailAlert;
         
         /// <summary>
-        /// MainContent control.
+        /// LoginException control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LoginException;
+        
+        /// <summary>
+        /// ErrorLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ErrorLabel;
     }
 }
