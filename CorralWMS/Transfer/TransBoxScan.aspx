@@ -12,6 +12,7 @@
         <asp:Label ID="ExceptionLabel" runat="server" Text="Label"></asp:Label>
     </div>
     <asp:HyperLink ID="BackLink" runat="server" CssClass="btn btn-primary" NavigateUrl="~/Transfer/ScanToLocation.aspx">Cambiar Ubicación...</asp:HyperLink>
+    <asp:Button ID="Button1" runat="server" Text="Cerrar Traslado" CssClass="btn btn-default pull-right" />
     <br /><br />
     <div class="row">
         <div class="col-md-6">
@@ -38,10 +39,10 @@
         <asp:SqlDataSource ID="BoxDataSrc" runat="server" ConnectionString="Data Source=(localdb)\mssqllocaldb;Initial Catalog=CorralWMS.Entities.LWMS_Context;Integrated Security=True" ProviderName="System.Data.SqlClient" 
             SelectCommand="SELECT T0.ItemCode Producto, T0.Batch Lote, T0.Id Caja, T0.Weight Peso, T2.BinCode Destino
 FROM Boxes T0
-LEFT JOIN FromLocationBoxes FLB ON FLB.Box_Batch=T0.Batch AND FLB.Box_Id=T0.ID
+LEFT JOIN FromLocationBoxes FLB ON FLB.Box_Batch=T0.Batch AND FLB.Box_Id=T0.ID AND FLB.Box_ItemCode=T0.ItemCode
 LEFT JOIN FromLocations T1 
 ON FLB.FromLocation_AbsEntry=T1.AbsEntry AND FLB.FromLocation_TransReqId=T1.TransReqId
-LEFT JOIN ToLocationBoxes TLB ON TLB.Box_Batch=T0.Batch AND TLB.Box_Id=T0.ID AND TLB.ToLocation_TransferId=FLB.FromLocation_TransReqId
+LEFT JOIN ToLocationBoxes TLB ON TLB.Box_ItemCode=T0.ItemCode AND TLB.Box_Batch=T0.Batch AND TLB.Box_Id=T0.ID AND TLB.ToLocation_TransferId=FLB.FromLocation_TransReqId
 LEFT JOIN ToLocations T2 ON TLB.ToLocation_AbsEntry=T2.AbsEntry AND TLB.ToLocation_TransferId=T2.TransferId AND T1.TransReqId=T2.TransferId
 WHERE T1.TransReqId=@ID">
             <SelectParameters>

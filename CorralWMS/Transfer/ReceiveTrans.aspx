@@ -29,7 +29,7 @@
                             ConnectionString="Data Source=(localdb)\mssqllocaldb;Initial Catalog=CorralWMS.Entities.LWMS_Context;Integrated Security=True" ProviderName="System.Data.SqlClient" 
                             SelectCommand="SELECT T4.ItemCode, SUM(T4.Weight) WT FROM FromLocations T2
                                 LEFT JOIN FromLocationBoxes T3 ON T2.AbsEntry=T3.FromLocation_AbsEntry AND T2.TransReqId=T3.FromLocation_TransReqId
-                                LEFT JOIN Boxes T4 ON T4.Batch=T3.Box_Batch AND T3.Box_Id=T4.Id WHERE T2.TransReqId=@TransReqID GROUP BY T4.ItemCode">
+                                LEFT JOIN Boxes T4 ON T4.Batch=T3.Box_Batch AND T3.Box_Id=T4.Id AND T4.ItemCode=t3.Box_ItemCode WHERE T2.TransReqId=@TransReqID GROUP BY T4.ItemCode">
                             <SelectParameters>
                                 <asp:Parameter DbType="Int32" Name="TransReqID" />
                             </SelectParameters>

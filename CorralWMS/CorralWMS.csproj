@@ -366,6 +366,10 @@
     <Compile Include="Migrations\201604271944031_Added_Mailing_listsNsettings.Designer.cs">
       <DependentUpon>201604271944031_Added_Mailing_listsNsettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604291600328_added_itemcode_to_boxPrimaryKey.cs" />
+    <Compile Include="Migrations\201604291600328_added_itemcode_to_boxPrimaryKey.Designer.cs">
+      <DependentUpon>201604291600328_added_itemcode_to_boxPrimaryKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Production\GoodsReceipt.aspx.cs">
       <DependentUpon>GoodsReceipt.aspx</DependentUpon>
@@ -475,6 +479,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604271944031_Added_Mailing_listsNsettings.resx">
       <DependentUpon>201604271944031_Added_Mailing_listsNsettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604291600328_added_itemcode_to_boxPrimaryKey.resx">
+      <DependentUpon>201604291600328_added_itemcode_to_boxPrimaryKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

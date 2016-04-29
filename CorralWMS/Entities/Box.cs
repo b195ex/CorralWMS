@@ -18,6 +18,8 @@ namespace CorralWMS.Entities
         public int Id { get; set; }
         [NotMapped]
         public string SAPBatch { get { return Batch + Id.ToString().PadLeft(8, '0'); } }
+        [Key]
+        [Column(Order = 3)]
         [MaxLength(20)]
         public string ItemCode { get; set; }
         public DateTime? ManufDate { get; set; }

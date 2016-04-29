@@ -42,7 +42,9 @@ namespace CorralWMS.Transfer
                 return;
             if (!(ScanTxt.Text.IndexOf('-') + 7 == ScanTxt.Text.IndexOf('.') && ScanTxt.Text.Length >= 30))
             {
-                throw new Exception("El código parece inválido");
+                ExceptionLabel.Text = "El código parece inválido";
+                Alert.Attributes["class"] = Alert.Attributes["class"].Replace("collapse", "");
+                return;
             }
             string itmcod = ScanTxt.Text.Substring(0, 8);
             double wt = double.Parse(ScanTxt.Text.Substring(8, 5));
@@ -64,7 +66,7 @@ namespace CorralWMS.Transfer
                         ctx.Entry(FLoc).Collection("Boxes").Load();
                         foreach (var box in FLoc.Boxes)
                         {
-                            if (box.Id == boxid && box.Batch == batch)
+                            if (box.Id == boxid && box.Batch == batch && box.ItemCode == itmcod)
                             {
                                 if (box.ToLocations.Count(t=>t.TransferId==trans.Id) > 0)
                                 {

@@ -69,12 +69,12 @@ namespace CorralWMS.Transfer
                 {
                     ctx.Entry(currFromLoc).State = System.Data.Entity.EntityState.Unchanged;
                     ctx.Entry(currFromLoc).Collection("Boxes").Load();
-                    var CurrBox = currFromLoc.Boxes.Where(b => b.Batch == batch && b.Id == boxid).FirstOrDefault();
+                    var CurrBox = currFromLoc.Boxes.Where(b => b.Batch == batch && b.Id == boxid && b.ItemCode==itmcod).FirstOrDefault();
                     if (CurrBox != null)
-                        throw new Exception("Lac caja ya se había agregado al traslado.");
+                        throw new Exception("La caja ya se había agregado al traslado.");
                     else
                     {
-                        CurrBox = ctx.Boxes.Find(new object[] { batch, boxid });
+                        CurrBox = ctx.Boxes.Find(new object[] { batch, boxid, itmcod });
                         if (CurrBox == null)
                         {
                             var itm = ctx.Items.Find(itmcod);
@@ -115,7 +115,7 @@ namespace CorralWMS.Transfer
             string connStr, sql = @"SELECT BinCode,ItemCode,Box_Batch,Box_Id,Weight 
                 FROM FromLocations T0 
                 LEFT JOIN FromLocationBoxes T1 ON T0.TransReqId=T1.FromLocation_TransReqId AND T0.AbsEntry=T1.FromLocation_AbsEntry 
-                LEFT JOIN Boxes T2 ON T1.Box_Batch=T2.Batch AND T1.Box_Id=T2.Id 
+                LEFT JOIN Boxes T2 ON T1.Box_Batch=T2.Batch AND T1.Box_Id=T2.Id AND T1.Box_ItemCode=T2.ItemCode
                 WHERE T0.TransReqId=@TransReqId";
             try
             {

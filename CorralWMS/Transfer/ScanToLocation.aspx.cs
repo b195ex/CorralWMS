@@ -44,6 +44,7 @@ namespace CorralWMS.Transfer
                 using (var ctx = new LWMS_Context())
                 {
                     ctx.Entry(currTrans).State = System.Data.Entity.EntityState.Unchanged;
+                    ctx.Entry(currTrans).Reference("TransReq").Load();
                     currReq = currTrans.TransReq;
                     ctx.Entry(currTrans).State = System.Data.Entity.EntityState.Detached;
                     SapSett = ctx.SapSettings.Find(1);
@@ -124,12 +125,12 @@ namespace CorralWMS.Transfer
                                         oTrans.Lines.BatchNumbers.SetCurrentLine(bat);
                                         if (box.SAPBatch == oTrans.Lines.BatchNumbers.BatchNumber)
                                         {
-                                            //batch fount, find bin
+                                            //batch found, find bin
                                             int loc;
                                             for (loc = 0; loc < oTrans.Lines.BinAllocations.Count; loc++)
                                             {
                                                 oTrans.Lines.BinAllocations.SetCurrentLine(loc);
-                                                if (oTrans.Lines.BinAllocations.BinAbsEntry == toLoc.AbsEntry)
+                                                if (oTrans.Lines.BinAllocations.BinAbsEntry == toLoc.AbsEntry && oTrans.Lines.BinAllocations.SerialAndBatchNumbersBaseLine==bat)
                                                 {
                                                     //bin found, add weight
                                                     oTrans.Lines.BinAllocations.SerialAndBatchNumbersBaseLine = bat;
@@ -142,6 +143,7 @@ namespace CorralWMS.Transfer
                                                 //bin not found, add bin
                                                 oTrans.Lines.BinAllocations.Add();
                                                 oTrans.Lines.BinAllocations.BinAbsEntry = toLoc.AbsEntry;
+                                                oTrans.Lines.BinAllocations.BinActionType = BinActionTypeEnum.batToWarehouse;
                                                 oTrans.Lines.BinAllocations.Quantity = box.Weight;
                                                 oTrans.Lines.BinAllocations.SerialAndBatchNumbersBaseLine = bat;
                                             }
@@ -171,10 +173,13 @@ namespace CorralWMS.Transfer
                     {
                         string asdf = oCompany.GetNewObjectKey();
                         currTrans.DocEntry = int.Parse(asdf);
+                        oCompany.GetNewObjectCode(out asdf);
+                        currTrans.DocNum = int.Parse(asdf);
                         currTrans.EndDate = DateTime.Now;
                         ctx.SaveChanges();
                         Session.Remove("CurrTrans");
                         Session.Remove("CurrToLoc");
+                        Response.Redirect("~/Transfer/ReceiveTrans.aspx");
                     }
                 }
             }
