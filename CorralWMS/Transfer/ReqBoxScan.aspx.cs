@@ -255,6 +255,7 @@ namespace CorralWMS.Transfer
                         ctx.SaveChanges();
                         Session.Remove("CurrReq");
                         Session.Remove("CurrFromLoc");
+                        Response.Redirect("~/Transfer/StartTransferReq.aspx");
                     }
                 }
             }

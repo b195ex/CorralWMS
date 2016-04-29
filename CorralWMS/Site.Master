@@ -53,6 +53,8 @@
                         <li><asp:HyperLink ID="ManagePermissions" runat="server" NavigateUrl="~/AppAdministration/ManagePermissions.aspx" OnLoad="Control_Load" reqperm="7">Gestión de Permisos</asp:HyperLink></li>
                         <li><asp:HyperLink ID="ManageSysMailLink" runat="server" NavigateUrl="~/AppAdministration/ManageSysMail.aspx" OnLoad="Control_Load" reqperm="19">Gestión de Correo de Sistema</asp:HyperLink></li>
                         <li><asp:HyperLink ID="ManageMailingListsLink" runat="server" NavigateUrl="~/AppAdministration/ManageSysMail.aspx" OnLoad="Control_Load" reqperm="20">Gestión de listas de Correo</asp:HyperLink></li>
+                        <li><asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Transfer/StartTransferReq.aspx" OnLoad="Control_Load" reqperm="15">Crear Transferencia</asp:HyperLink></li>
+                        <li><asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Transfer/ReceiveTrans.aspx" OnLoad="Control_Load" reqperm="16">Recibir Transferencia</asp:HyperLink></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>

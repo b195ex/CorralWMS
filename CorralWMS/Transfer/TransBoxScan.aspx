@@ -12,7 +12,7 @@
         <asp:Label ID="ExceptionLabel" runat="server" Text="Label"></asp:Label>
     </div>
     <asp:HyperLink ID="BackLink" runat="server" CssClass="btn btn-primary" NavigateUrl="~/Transfer/ScanToLocation.aspx">Cambiar Ubicación...</asp:HyperLink>
-    <asp:Button ID="Button1" runat="server" Text="Cerrar Traslado" CssClass="btn btn-default pull-right" />
+    <asp:Button ID="Button1" runat="server" Text="Cerrar Traslado" CssClass="btn btn-default pull-right" OnClick="Button1_Click" />
     <br /><br />
     <div class="row">
         <div class="col-md-6">

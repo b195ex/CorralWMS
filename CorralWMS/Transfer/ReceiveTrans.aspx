@@ -12,7 +12,7 @@
         <asp:Label ID="ExceptionLabel" runat="server" Text="Label"></asp:Label>
     </div>
     <div class="table-responsive">
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered table-striped" DataKeyNames="Id" DataSourceID="ReqDataSrc" GridLines="None" OnRowDataBound="GridView1_RowDataBound" OnPreRender="Grid_PreRender" OnSelectedIndexChanging="GridView1_SelectedIndexChanging">
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered table-striped" DataKeyNames="Id" DataSourceID="ReqDataSrc" GridLines="None" OnRowDataBound="GridView1_RowDataBound" OnPreRender="Grid_PreRender" OnSelectedIndexChanging="GridView1_SelectedIndexChanging" EmptyDataText="No hay traslados que mostrar.">
             <Columns>
                 <asp:BoundField DataField="DocEntry" HeaderText="Documento" SortExpression="DocEntry" />
                 <asp:BoundField DataField="FromWhs" HeaderText="Origen" SortExpression="FromWhs" />

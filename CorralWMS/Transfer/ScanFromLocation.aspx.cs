@@ -148,6 +148,7 @@ namespace CorralWMS.Transfer
                                 }
                                 else
                                 {
+                                    //line found, find batch
                                     oTransReq.Lines.Quantity += box.Weight;
                                     int y;
                                     for (y = 0; y < oTransReq.Lines.BatchNumbers.Count; y++)
@@ -203,6 +204,7 @@ namespace CorralWMS.Transfer
                         ctx.SaveChanges();
                         Session.Remove("CurrReq");
                         Session.Remove("CurrFromLoc");
+                        Response.Redirect("~/Transfer/StartTransferReq.aspx");
                     }
                 }
             }
