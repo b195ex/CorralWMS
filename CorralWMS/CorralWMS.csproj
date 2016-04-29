@@ -117,10 +117,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="AppAdministration\ManageMailingLists.aspx" />
     <Content Include="AppAdministration\ManagePermissions.aspx" />
     <Content Include="AppAdministration\ManageRoles.aspx" />
     <Content Include="AppAdministration\ManageSAP.aspx" />
     <Content Include="AppAdministration\ManageSettings.aspx" />
+    <Content Include="AppAdministration\ManageSysMail.aspx" />
     <Content Include="AppAdministration\ManageUsers.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -220,6 +222,12 @@
     <Content Include="Global.asax" />
     <Content Include="SignIn.aspx" />
     <Content Include="Site.Master" />
+    <Content Include="Transfer\ReceiveTrans.aspx" />
+    <Content Include="Transfer\ReqBoxScan.aspx" />
+    <Content Include="Transfer\ScanFromLocation.aspx" />
+    <Content Include="Transfer\ScanToLocation.aspx" />
+    <Content Include="Transfer\StartTransferReq.aspx" />
+    <Content Include="Transfer\TransBoxScan.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -233,6 +241,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppAdministration\ManageMailingLists.aspx.cs">
+      <DependentUpon>ManageMailingLists.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AppAdministration\ManageMailingLists.aspx.designer.cs">
+      <DependentUpon>ManageMailingLists.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AppAdministration\ManagePermissions.aspx.cs">
       <DependentUpon>ManagePermissions.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -260,6 +275,13 @@
     </Compile>
     <Compile Include="AppAdministration\ManageSettings.aspx.designer.cs">
       <DependentUpon>ManageSettings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AppAdministration\ManageSysMail.aspx.cs">
+      <DependentUpon>ManageSysMail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AppAdministration\ManageSysMail.aspx.designer.cs">
+      <DependentUpon>ManageSysMail.aspx</DependentUpon>
     </Compile>
     <Compile Include="AppAdministration\ManageUsers.aspx.cs">
       <DependentUpon>ManageUsers.aspx</DependentUpon>
@@ -292,10 +314,18 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Entities\AppSetting.cs" />
+    <Compile Include="Entities\Box.cs" />
+    <Compile Include="Entities\FromLocation.cs" />
+    <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\LWMS_Context.cs" />
+    <Compile Include="Entities\MailingList.cs" />
+    <Compile Include="Entities\MailSetting.cs" />
     <Compile Include="Entities\Permission.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\SapSetting.cs" />
+    <Compile Include="Entities\ToLocations.cs" />
+    <Compile Include="Entities\Transfer.cs" />
+    <Compile Include="Entities\TransReq.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -315,6 +345,26 @@
     <Compile Include="Migrations\201604122204563_addedSapSettings.cs" />
     <Compile Include="Migrations\201604122204563_addedSapSettings.Designer.cs">
       <DependentUpon>201604122204563_addedSapSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604151913580_addedStockTransferObjects.cs" />
+    <Compile Include="Migrations\201604151913580_addedStockTransferObjects.Designer.cs">
+      <DependentUpon>201604151913580_addedStockTransferObjects.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604201706472_changedToAccomodateoff-DB-Boxes.cs" />
+    <Compile Include="Migrations\201604201706472_changedToAccomodateoff-DB-Boxes.Designer.cs">
+      <DependentUpon>201604201706472_changedToAccomodateoff-DB-Boxes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604212214274_addedLicenseServer.cs" />
+    <Compile Include="Migrations\201604212214274_addedLicenseServer.Designer.cs">
+      <DependentUpon>201604212214274_addedLicenseServer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604251716133_changed_transfer.endDateToNullable.cs" />
+    <Compile Include="Migrations\201604251716133_changed_transfer.endDateToNullable.Designer.cs">
+      <DependentUpon>201604251716133_changed_transfer.endDateToNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604271944031_Added_Mailing_listsNsettings.cs" />
+    <Compile Include="Migrations\201604271944031_Added_Mailing_listsNsettings.Designer.cs">
+      <DependentUpon>201604271944031_Added_Mailing_listsNsettings.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Production\GoodsReceipt.aspx.cs">
@@ -348,6 +398,48 @@
     </Compile>
     <Compile Include="Tools\SAPSingleton.cs" />
     <Compile Include="Tools\SecurityTools.cs" />
+    <Compile Include="Transfer\ReceiveTrans.aspx.cs">
+      <DependentUpon>ReceiveTrans.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Transfer\ReceiveTrans.aspx.designer.cs">
+      <DependentUpon>ReceiveTrans.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Transfer\ReqBoxScan.aspx.cs">
+      <DependentUpon>ReqBoxScan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Transfer\ReqBoxScan.aspx.designer.cs">
+      <DependentUpon>ReqBoxScan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Transfer\ScanFromLocation.aspx.cs">
+      <DependentUpon>ScanFromLocation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Transfer\ScanFromLocation.aspx.designer.cs">
+      <DependentUpon>ScanFromLocation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Transfer\ScanToLocation.aspx.cs">
+      <DependentUpon>ScanToLocation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Transfer\ScanToLocation.aspx.designer.cs">
+      <DependentUpon>ScanToLocation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Transfer\StartTransferReq.aspx.cs">
+      <DependentUpon>StartTransferReq.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Transfer\StartTransferReq.aspx.designer.cs">
+      <DependentUpon>StartTransferReq.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Transfer\TransBoxScan.aspx.cs">
+      <DependentUpon>TransBoxScan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Transfer\TransBoxScan.aspx.designer.cs">
+      <DependentUpon>TransBoxScan.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -368,6 +460,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604122204563_addedSapSettings.resx">
       <DependentUpon>201604122204563_addedSapSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604151913580_addedStockTransferObjects.resx">
+      <DependentUpon>201604151913580_addedStockTransferObjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604201706472_changedToAccomodateoff-DB-Boxes.resx">
+      <DependentUpon>201604201706472_changedToAccomodateoff-DB-Boxes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604212214274_addedLicenseServer.resx">
+      <DependentUpon>201604212214274_addedLicenseServer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604251716133_changed_transfer.endDateToNullable.resx">
+      <DependentUpon>201604251716133_changed_transfer.endDateToNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604271944031_Added_Mailing_listsNsettings.resx">
+      <DependentUpon>201604271944031_Added_Mailing_listsNsettings.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

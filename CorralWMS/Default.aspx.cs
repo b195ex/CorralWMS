@@ -19,5 +19,17 @@ namespace CorralWMS
                 Label1.Text = ctx.Database.Connection.ConnectionString;
             }
         }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var comp = Tools.SAPSingleton.oCompany;
+            }
+            catch (Exception ex)
+            {
+                Label1.Text += ex.Message;
+            }
+        }
     }
 }

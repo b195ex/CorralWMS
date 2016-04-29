@@ -7,90 +7,72 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CorralWMS {
+namespace CorralWMS.Transfer {
     
     
-    public partial class SiteMaster {
+    public partial class ReqBoxScan {
         
         /// <summary>
-        /// AppSettingsNavLink control.
+        /// Alert control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink AppSettingsNavLink;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Alert;
         
         /// <summary>
-        /// ManageSAP control.
+        /// ExceptionLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink ManageSAP;
+        protected global::System.Web.UI.WebControls.Label ExceptionLabel;
         
         /// <summary>
-        /// ManageUsersNavLink control.
+        /// BackLink control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink ManageUsersNavLink;
+        protected global::System.Web.UI.WebControls.HyperLink BackLink;
         
         /// <summary>
-        /// ManageRolesNavLink control.
+        /// EndBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink ManageRolesNavLink;
+        protected global::System.Web.UI.WebControls.Button EndBtn;
         
         /// <summary>
-        /// ManagePermissions control.
+        /// ScanTxt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink ManagePermissions;
+        protected global::System.Web.UI.WebControls.TextBox ScanTxt;
         
         /// <summary>
-        /// ManageSysMailLink control.
+        /// ScanBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink ManageSysMailLink;
+        protected global::System.Web.UI.WebControls.Button ScanBtn;
         
         /// <summary>
-        /// ManageMailingListsLink control.
+        /// BoxGrid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink ManageMailingListsLink;
-        
-        /// <summary>
-        /// LogoutLinkBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LogoutLinkBtn;
-        
-        /// <summary>
-        /// MainContent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.GridView BoxGrid;
     }
 }

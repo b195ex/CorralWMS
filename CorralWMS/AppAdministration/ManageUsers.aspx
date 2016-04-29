@@ -45,7 +45,7 @@
                         <asp:TextBox ID="EmailTxt" runat="server" CssClass="form-control" TextMode="Email" placeholder="correo@ejemplo.com"></asp:TextBox>
                     </div>
                     <div class="col-md-4">
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="EmailTxt" ForeColor="Red">*Ingrese una dirección válida</asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="EmailTxt" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*">*Ingrese una dirección válida</asp:RegularExpressionValidator>
                     </div>
                 </div>
                 <div class="form-group">

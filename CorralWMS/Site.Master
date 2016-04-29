@@ -51,10 +51,12 @@
                         <li><asp:HyperLink ID="ManageUsersNavLink" runat="server" NavigateUrl="~/AppAdministration/ManageUsers.aspx" OnLoad="Control_Load" reqperm="8">Gestión de Usuarios</asp:HyperLink></li>
                         <li><asp:HyperLink ID="ManageRolesNavLink" runat="server" NavigateUrl="~/AppAdministration/ManageRoles.aspx" OnLoad="Control_Load" reqperm="9">Gestión de Roles</asp:HyperLink></li>
                         <li><asp:HyperLink ID="ManagePermissions" runat="server" NavigateUrl="~/AppAdministration/ManagePermissions.aspx" OnLoad="Control_Load" reqperm="7">Gestión de Permisos</asp:HyperLink></li>
+                        <li><asp:HyperLink ID="ManageSysMailLink" runat="server" NavigateUrl="~/AppAdministration/ManageSysMail.aspx" OnLoad="Control_Load" reqperm="19">Gestión de Correo de Sistema</asp:HyperLink></li>
+                        <li><asp:HyperLink ID="ManageMailingListsLink" runat="server" NavigateUrl="~/AppAdministration/ManageSysMail.aspx" OnLoad="Control_Load" reqperm="20">Gestión de listas de Correo</asp:HyperLink></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <asp:LinkButton ID="LogoutLinkBtn" runat="server" OnClick="LogoutLinkBtn_Click">Hola, <%: ((CorralWMS.Entities.User)Session["LoggedinUser"]).Name  %>!</asp:LinkButton>
+                            <asp:LinkButton ID="LogoutLinkBtn" runat="server" OnClick="LogoutLinkBtn_Click" ValidationGroup="none">Hola, <%: ((CorralWMS.Entities.User)Session["LoggedinUser"]).Name  %>!</asp:LinkButton>
                         </li>
                     </ul>
                 </div>

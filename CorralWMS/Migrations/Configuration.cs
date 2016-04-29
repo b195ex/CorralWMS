@@ -27,28 +27,48 @@ namespace CorralWMS.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-            context.SapSettings.AddOrUpdate(p => p.id, new SapSetting(){
-                CompanyDB = "SBO_DEMOCR",
-                DbPassword = "On3S0lu10ns",
-                DbServerType = SAPbobsCOM.BoDataServerTypes.dst_MSSQL2012,
-                DbUserName = "sa",
-                id = 1,
-                language = SAPbobsCOM.BoSuppLangs.ln_English,
-                Password = "manager",
-                Server = "HNAPP01",
-                UserName = "manager",
-                UseTrusted = false
-            });
-            context.Users.AddOrUpdate(u => u.Id, new User()
-            {
-                Active = true,
-                Email = "mail@example.com",
-                FirstName = "Erick",
-                Id = 1,
-                LastName = "Viera",
-                Password = "lonewolf",
-                UserName = "b195ex"
-            });
+            context.SapSettings.AddOrUpdate(p => p.id, 
+                new SapSetting()
+                {
+                    CompanyDB = "SBODEMOCR",
+                    DbPassword = "On3S0lut10ns",
+                    DbServerType = SAPbobsCOM.BoDataServerTypes.dst_MSSQL2012,
+                    DbUserName = "sa",
+                    id = 1,
+                    language = SAPbobsCOM.BoSuppLangs.ln_English,
+                    Password = "1234",
+                    Server = "HNAPP01",
+                    UserName = "manager",
+                    UseTrusted = false,
+                    LicenseServer = "HNAPP01"
+                }
+            );
+            context.Users.AddOrUpdate(u => u.Id, 
+                new User()
+                {
+                    Active = true,
+                    Email = "mail@example.com",
+                    FirstName = "Erick",
+                    Id = 1,
+                    LastName = "Viera",
+                    Password = "lonewolf",
+                    UserName = "b195ex"
+                }
+            );
+            context.MailSettings.AddOrUpdate(m => m.Id, 
+                new MailSetting()
+                {
+                    FromAddress = "payrolltc@gmail.com",
+                    FromPass = "payroll.123",
+                    Id = 1,
+                    MailHost = "smtp.gmail.com",
+                    MailPort = 587
+                }
+            );
+            context.MailingLists.AddOrUpdate(ml => ml.Id,
+                new MailingList() { Id = 1, Name = "Facturación" },
+                new MailingList() { Id = 2, Name = "Traslado" }
+            );
         }
     }
 }

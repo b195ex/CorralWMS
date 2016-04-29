@@ -12,7 +12,7 @@ namespace CorralWMS.Tools
         private static volatile Company myVar;
         private static object syncRoot = new Object();
 
-        public Company oCompany
+        public static Company oCompany
         {
             get 
             {
@@ -38,6 +38,7 @@ namespace CorralWMS.Tools
                             myVar.Server = connsett.Server;
                             myVar.UserName = connsett.UserName;
                             myVar.UseTrusted = connsett.UseTrusted;
+                            myVar.LicenseServer = connsett.Server;
                         }
                     }
                 }
@@ -47,7 +48,8 @@ namespace CorralWMS.Tools
                     {
                         if (!myVar.Connected)
                         {
-                            if (myVar.Connect() != 0)
+                            int res = myVar.Connect();
+                            if (res != 0)
                             {
                                 int errCode;
                                 string errMsg;

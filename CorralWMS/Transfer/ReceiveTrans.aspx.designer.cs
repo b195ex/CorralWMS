@@ -7,54 +7,45 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CorralWMS.Production {
+namespace CorralWMS.Transfer {
     
     
-    public partial class GoodsReceipt {
+    public partial class ReceiveTrans {
         
         /// <summary>
-        /// UpdatePanel1 control.
+        /// Alert control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Alert;
         
         /// <summary>
-        /// AddPermissionAlert control.
+        /// ExceptionLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl AddPermissionAlert;
+        protected global::System.Web.UI.WebControls.Label ExceptionLabel;
         
         /// <summary>
-        /// AddPermissionExceptionLabel control.
+        /// GridView1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label AddPermissionExceptionLabel;
+        protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
-        /// Button1 control.
+        /// ReqDataSrc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
-        
-        /// <summary>
-        /// ProductionOrdersLstBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox ProductionOrdersLstBox;
+        protected global::System.Web.UI.WebControls.SqlDataSource ReqDataSrc;
     }
 }

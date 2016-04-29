@@ -42,5 +42,6 @@ namespace CorralWMS.Entities
         public bool Active { get; set; }
 
         public virtual ICollection<Role> Roles { get; set; }
+        public virtual ICollection<MailingList> MailingLists { get; set; }
     }
 }

@@ -5,6 +5,7 @@
     <div class="jumbotron">
         <h1>ASP.NET</h1>
         <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+        <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
     </div>
 
 </asp:Content>
