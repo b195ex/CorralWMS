@@ -16,7 +16,7 @@ namespace CorralWMS
                 Response.Redirect("~/SignIn.aspx");
             using (var ctx = new LWMS_Context())
             {
-                Label1.Text = ctx.Database.Connection.ConnectionString;
+                //Label1.Text = ctx.Database.Connection.ConnectionString;
             }
         }
 

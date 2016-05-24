@@ -36,7 +36,7 @@ namespace CorralWMS.Entities
             get 
             { 
                 return string.Format(
-                    "data source={0};initial catalog={1};persist security info=True;user id={2};password={3}",
+                    "Data Source={0};Initial Catalog={1};User Id={2};Password={3}",
                     Server, CompanyDB, DbUserName, DbPassword);
             } 
         }

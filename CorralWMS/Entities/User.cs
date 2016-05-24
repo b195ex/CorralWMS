@@ -43,5 +43,7 @@ namespace CorralWMS.Entities
 
         public virtual ICollection<Role> Roles { get; set; }
         public virtual ICollection<MailingList> MailingLists { get; set; }
+        public virtual ICollection<ProdEntry> ProdEntries { get; set; }
+        public virtual ICollection<WhsInv> WhsInvs { get; set; }
     }
 }

@@ -4,6 +4,11 @@ namespace CorralWMS.Entities
 {
     public class LWMS_Context : DbContext
     {
+        public LWMS_Context()
+            : base("name=LWMS_Context")
+        {
+
+        }
         public virtual DbSet<AppSetting> AppSettings { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
@@ -17,5 +22,12 @@ namespace CorralWMS.Entities
         public virtual DbSet<Box> Boxes { get; set; }
         public virtual DbSet<MailSetting> MailSettings { get; set; }
         public virtual DbSet<MailingList> MailingLists { get; set; }
+        public virtual DbSet<ProdEntry> ProdEntries { get; set; }
+        public virtual DbSet<EntryLocation> EntryLocations { get; set; }
+        public virtual DbSet<CriticLocation> CriticLocations { get; set; }
+        public virtual DbSet<CycleCount> CycleCounts { get; set; }
+        public virtual DbSet<BinAudit> BinAudits { get; set; }
+        public virtual DbSet<WhsInv> WhsInvs { get; set; }
+        public virtual DbSet<LocInv> LocInvs { get; set; }
     }
 }

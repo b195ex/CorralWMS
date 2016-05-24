@@ -117,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="AppAdministration\ManageCriticLocations.aspx" />
     <Content Include="AppAdministration\ManageMailingLists.aspx" />
     <Content Include="AppAdministration\ManagePermissions.aspx" />
     <Content Include="AppAdministration\ManageRoles.aspx" />
@@ -124,6 +125,8 @@
     <Content Include="AppAdministration\ManageSettings.aspx" />
     <Content Include="AppAdministration\ManageSysMail.aspx" />
     <Content Include="AppAdministration\ManageUsers.aspx" />
+    <Content Include="BinAudits\AuditBoxScan.aspx" />
+    <Content Include="BinAudits\ScanAuditBin.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -163,10 +166,17 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="CycleCounts\DoCycleCount.aspx" />
+    <Content Include="Dispatching\Orders.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Images\DelCorralLogo-neg.png" />
     <Content Include="Images\DelCorralLogo.png" />
     <Content Include="Images\lynxLogo.png" />
+    <Content Include="Inventories\LocInvBoxScan.aspx" />
+    <Content Include="Inventories\LocInvDtl.aspx" />
+    <Content Include="Inventories\LocInvReport.aspx" />
+    <Content Include="Inventories\ScanBin.aspx" />
+    <Content Include="Inventories\StartInventory.aspx" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -176,9 +186,13 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Production\BoxScanEntry.aspx" />
     <Content Include="Production\GoodsReceipt.aspx" />
+    <Content Include="Production\ScanLocationEntry.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="BinCodSrch.ashx" />
+    <None Include="Properties\PublishProfiles\LWMS_pub.pubxml" />
     <None Include="Scripts\jquery-2.2.2.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.2.js" />
     <Content Include="Scripts\jquery-2.2.2.min.js" />
@@ -229,7 +243,9 @@
     <Content Include="Transfer\StartTransferReq.aspx" />
     <Content Include="Transfer\TransBoxScan.aspx" />
     <Content Include="ViewSwitcher.ascx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Bundle.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Site.Mobile.Master" />
@@ -241,6 +257,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppAdministration\ManageCriticLocations.aspx.cs">
+      <DependentUpon>ManageCriticLocations.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AppAdministration\ManageCriticLocations.aspx.designer.cs">
+      <DependentUpon>ManageCriticLocations.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AppAdministration\ManageMailingLists.aspx.cs">
       <DependentUpon>ManageMailingLists.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -299,12 +322,36 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BinAudits\AuditBoxScan.aspx.cs">
+      <DependentUpon>AuditBoxScan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BinAudits\AuditBoxScan.aspx.designer.cs">
+      <DependentUpon>AuditBoxScan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BinAudits\ScanAuditBin.aspx.cs">
+      <DependentUpon>ScanAuditBin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BinAudits\ScanAuditBin.aspx.designer.cs">
+      <DependentUpon>ScanAuditBin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BinCodSrch.ashx.cs">
+      <DependentUpon>BinCodSrch.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CycleCounts\DoCycleCount.aspx.cs">
+      <DependentUpon>DoCycleCount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CycleCounts\DoCycleCount.aspx.designer.cs">
+      <DependentUpon>DoCycleCount.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -313,22 +360,71 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Dispatching\Orders.aspx.cs">
+      <DependentUpon>Orders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dispatching\Orders.aspx.designer.cs">
+      <DependentUpon>Orders.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Entities\AppSetting.cs" />
+    <Compile Include="Entities\BinAudit.cs" />
     <Compile Include="Entities\Box.cs" />
+    <Compile Include="Entities\CriticLocation.cs" />
+    <Compile Include="Entities\CycleCount.cs" />
+    <Compile Include="Entities\EntryLocation.cs" />
     <Compile Include="Entities\FromLocation.cs" />
     <Compile Include="Entities\Item.cs" />
+    <Compile Include="Entities\LocInv.cs" />
     <Compile Include="Entities\LWMS_Context.cs" />
     <Compile Include="Entities\MailingList.cs" />
     <Compile Include="Entities\MailSetting.cs" />
     <Compile Include="Entities\Permission.cs" />
+    <Compile Include="Entities\ProdEntry.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\SapSetting.cs" />
     <Compile Include="Entities\ToLocations.cs" />
     <Compile Include="Entities\Transfer.cs" />
     <Compile Include="Entities\TransReq.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\WhsInv.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Inventories\LocInvBoxScan.aspx.cs">
+      <DependentUpon>LocInvBoxScan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inventories\LocInvBoxScan.aspx.designer.cs">
+      <DependentUpon>LocInvBoxScan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Inventories\LocInvDtl.aspx.cs">
+      <DependentUpon>LocInvDtl.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inventories\LocInvDtl.aspx.designer.cs">
+      <DependentUpon>LocInvDtl.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Inventories\LocInvReport.aspx.cs">
+      <DependentUpon>LocInvReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inventories\LocInvReport.aspx.designer.cs">
+      <DependentUpon>LocInvReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Inventories\ScanBin.aspx.cs">
+      <DependentUpon>ScanBin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inventories\ScanBin.aspx.designer.cs">
+      <DependentUpon>ScanBin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Inventories\StartInventory.aspx.cs">
+      <DependentUpon>StartInventory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inventories\StartInventory.aspx.designer.cs">
+      <DependentUpon>StartInventory.aspx</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201604072006193_addedUsers_Roles_Permissions.cs" />
     <Compile Include="Migrations\201604072006193_addedUsers_Roles_Permissions.Designer.cs">
@@ -370,13 +466,47 @@
     <Compile Include="Migrations\201604291600328_added_itemcode_to_boxPrimaryKey.Designer.cs">
       <DependentUpon>201604291600328_added_itemcode_to_boxPrimaryKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605022005317_added_ProdEntry.cs" />
+    <Compile Include="Migrations\201605022005317_added_ProdEntry.Designer.cs">
+      <DependentUpon>201605022005317_added_ProdEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605041751191_added_cycleCounts.cs" />
+    <Compile Include="Migrations\201605041751191_added_cycleCounts.Designer.cs">
+      <DependentUpon>201605041751191_added_cycleCounts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605131837129_added_BinAudits.cs" />
+    <Compile Include="Migrations\201605131837129_added_BinAudits.Designer.cs">
+      <DependentUpon>201605131837129_added_BinAudits.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605171701578_added_WhsInv.cs" />
+    <Compile Include="Migrations\201605171701578_added_WhsInv.Designer.cs">
+      <DependentUpon>201605171701578_added_WhsInv.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605191533460_addedWhsInv_User.cs" />
+    <Compile Include="Migrations\201605191533460_addedWhsInv_User.Designer.cs">
+      <DependentUpon>201605191533460_addedWhsInv_User.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Production\BoxScanEntry.aspx.cs">
+      <DependentUpon>BoxScanEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Production\BoxScanEntry.aspx.designer.cs">
+      <DependentUpon>BoxScanEntry.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Production\GoodsReceipt.aspx.cs">
       <DependentUpon>GoodsReceipt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Production\GoodsReceipt.aspx.designer.cs">
       <DependentUpon>GoodsReceipt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Production\ScanLocationEntry.aspx.cs">
+      <DependentUpon>ScanLocationEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Production\ScanLocationEntry.aspx.designer.cs">
+      <DependentUpon>ScanLocationEntry.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignIn.aspx.cs">
@@ -402,6 +532,7 @@
     </Compile>
     <Compile Include="Tools\SAPSingleton.cs" />
     <Compile Include="Tools\SecurityTools.cs" />
+    <Compile Include="Tools\Util.cs" />
     <Compile Include="Transfer\ReceiveTrans.aspx.cs">
       <DependentUpon>ReceiveTrans.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -482,6 +613,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604291600328_added_itemcode_to_boxPrimaryKey.resx">
       <DependentUpon>201604291600328_added_itemcode_to_boxPrimaryKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605022005317_added_ProdEntry.resx">
+      <DependentUpon>201605022005317_added_ProdEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605041751191_added_cycleCounts.resx">
+      <DependentUpon>201605041751191_added_cycleCounts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605131837129_added_BinAudits.resx">
+      <DependentUpon>201605131837129_added_BinAudits.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605171701578_added_WhsInv.resx">
+      <DependentUpon>201605171701578_added_WhsInv.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605191533460_addedWhsInv_User.resx">
+      <DependentUpon>201605191533460_addedWhsInv_User.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

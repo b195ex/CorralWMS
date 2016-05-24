@@ -12,6 +12,8 @@ namespace CorralWMS.Transfer
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack) 
+                ReqDataSrc.DataBind();
             var usuario = (User)Session["LoggedInUser"];
             if (usuario == null)
                 Response.Redirect("~/SignIn.aspx");

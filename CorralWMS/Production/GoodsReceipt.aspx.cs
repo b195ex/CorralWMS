@@ -14,44 +14,99 @@ namespace CorralWMS.Production
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            var usuario = (User)Session["LoggedInUser"];
+            if (usuario == null)
+                Response.Redirect("~/SignIn.aspx");
+            else
+            {
+                var permisos = (HashSet<Permission>)Session["Permissions"];
+                var perm = permisos.Where(p => p.Id == 23).FirstOrDefault();
+                if (perm == null)
+                {
+                    Response.Redirect("~/Default.aspx");
+                }
+                else using (var ctx = new LWMS_Context())
+                {
+                    try
+                    {
+                        var sett = ctx.SapSettings.Find(1);
+                        ProdOrdrDataSrc.ConnectionString = sett.ConnectionString;
+                        var entry = ctx.ProdEntries.Where(p => p.DocEntry == null && p.UserId == usuario.Id).FirstOrDefault();
+                        if (entry != null)
+                        {
+                            Session.Add("CurrEntry", entry);
+                            Response.Redirect("~/Production/ScanLocationEntry.aspx");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        while (ex.InnerException != null)
+                            ex = ex.InnerException;
+                        ExceptionLabel.Text = ex.Message;
+                        Alert.Attributes["class"] = Alert.Attributes["class"].Replace("collapse", "");
+                    }
+                }
+            }
         }
 
-        protected void ProductionOrdersLstBox_DataBinding(object sender, EventArgs e)
+        protected void ProdOrdrGrid_PreRender(object sender, EventArgs e)
         {
+            var grid = (GridView)sender;
+            if (grid.HeaderRow != null)
+                grid.HeaderRow.TableSection = TableRowSection.TableHeader;
+        }
+
+        protected void ProdOrdrGrid_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
+        {
+            var grid = (GridView)sender;
+            var ProdOrdrKey= (int)grid.DataKeys[e.NewSelectedIndex].Value;
+            var Entry = new ProdEntry();
+            Entry.BaseEntry = ProdOrdrKey;
+            Entry.ItemCode = grid.Rows[e.NewSelectedIndex].Cells[1].Text;
+            Entry.UserId = ((User)Session["LoggedInUser"]).Id;
             try
             {
-                SapSetting SAPSett;
                 using (var ctx = new LWMS_Context())
                 {
-                    SAPSett = ctx.SapSettings.Find(1);
+                    ctx.ProdEntries.Add(Entry);
+                    ctx.SaveChanges();
+                    ctx.Entry(Entry).State = System.Data.Entity.EntityState.Detached;
                 }
-                string cstr = string.Format("data source={0};initial catalog={1};persist security info=True;user id={2};password={4}", SAPSett.Server, SAPSett.CompanyDB, SAPSett.DbUserName, SAPSett.DbPassword);
-                string cmdText = "SELECT * FROM OWOR WHERE Status='R' --AND ItemCode = @ItemCode";
-                using (var cmd = new SqlCommand(cmdText, new SqlConnection(cstr)))
-                {
-                    SqlParameter param = new SqlParameter("ItemCode", "");
-                    cmd.Connection.Open();
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    ProductionOrdersLstBox.DataTextField = "DocNum";
-                    ProductionOrdersLstBox.DataValueField = "DocEntry";
-                    ProductionOrdersLstBox.DataSource = dt;
-                    ProductionOrdersLstBox.DataBind();
-                }
+                Session.Add("CurrEntry", Entry);
+                Response.Redirect("~/Production/ScanLocationEntry.aspx");
             }
             catch (Exception ex)
             {
                 while (ex.InnerException != null)
                     ex = ex.InnerException;
-                //show the error message
+                ExceptionLabel.Text = ex.Message;
+                Alert.Attributes["class"] = Alert.Attributes["class"].Replace("collapse", "");
             }
+            e.Cancel = true;
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void StartBtn_Click(object sender, EventArgs e)
         {
-            AddPermissionAlert.Attributes["class"] = AddPermissionAlert.Attributes["class"].Replace("collapse", "");
+            var Entry = new ProdEntry();
+            Entry.UserId = ((User)Session["LoggedInUser"]).Id;
+            try
+            {
+                using (var ctx = new LWMS_Context())
+                {
+                    ctx.ProdEntries.Add(Entry);
+                    ctx.SaveChanges();
+                    ctx.Entry(Entry).State = System.Data.Entity.EntityState.Detached;
+                }
+                Session.Add("CurrEntry", Entry);
+                Response.Redirect("~/Production/ScanLocationEntry.aspx");
+            }
+            catch (Exception ex)
+            {
+                while (ex.InnerException != null)
+                    ex = ex.InnerException;
+                ExceptionLabel.Text = ex.Message;
+                Alert.Attributes["class"] = Alert.Attributes["class"].Replace("collapse", "");
+            }
         }
     }
 }

@@ -26,8 +26,18 @@ namespace CorralWMS.Entities
         [NotMapped]
         public DateTime ExpDate { get { return ManufDate == null ? ManufDate.Value : ManufDate.Value.AddDays(Item.Duration); } }
         public Double Weight { get; set; }
+        [ForeignKey("EntryLocation")]
+        [Column(Order = 4)]
+        public int? ProdEntryID { get; set; }
+        [ForeignKey("EntryLocation")]
+        [Column(Order = 5)]
+        public int? AbsEntry { get; set; }
         public virtual ICollection<FromLocation> FromLocations { get; set; }
         public virtual ICollection<ToLocation> ToLocations { get; set; }
         public virtual Item Item { get; set; }
+        public virtual EntryLocation EntryLocation { get; set; }
+        public virtual ICollection<CycleCount> CycleCounts { get; set; }
+        public virtual ICollection<BinAudit> BinAudits { get; set; }
+        public virtual ICollection<LocInv> LocInvs { get; set; }
     }
 }
