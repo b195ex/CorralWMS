@@ -124,7 +124,7 @@
                         </Columns>
                     </asp:GridView>
                 </div>
-                <asp:Button ID="AssignBtn" runat="server" Text="Guardar Cambios" CssClass="btn btn-default" OnClick="AssignBtn_Click" UseSubmitBehavior="false" />
+                <asp:Button ID="AssignBtn" runat="server" Text="Guardar Cambios" CausesValidation="false" CssClass="btn btn-default" OnClick="AssignBtn_Click" UseSubmitBehavior="false" />
             </ContentTemplate>
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="CreateBtn" EventName="Click" />

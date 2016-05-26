@@ -118,6 +118,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="AppAdministration\ManageCriticLocations.aspx" />
+    <Content Include="AppAdministration\ManageItems.aspx" />
     <Content Include="AppAdministration\ManageMailingLists.aspx" />
     <Content Include="AppAdministration\ManagePermissions.aspx" />
     <Content Include="AppAdministration\ManageRoles.aspx" />
@@ -263,6 +264,13 @@
     </Compile>
     <Compile Include="AppAdministration\ManageCriticLocations.aspx.designer.cs">
       <DependentUpon>ManageCriticLocations.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AppAdministration\ManageItems.aspx.cs">
+      <DependentUpon>ManageItems.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AppAdministration\ManageItems.aspx.designer.cs">
+      <DependentUpon>ManageItems.aspx</DependentUpon>
     </Compile>
     <Compile Include="AppAdministration\ManageMailingLists.aspx.cs">
       <DependentUpon>ManageMailingLists.aspx</DependentUpon>
@@ -486,6 +494,14 @@
     <Compile Include="Migrations\201605191533460_addedWhsInv_User.Designer.cs">
       <DependentUpon>201605191533460_addedWhsInv_User.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605251913348_addedItem.Itemname.cs" />
+    <Compile Include="Migrations\201605251913348_addedItem.Itemname.Designer.cs">
+      <DependentUpon>201605251913348_addedItem.Itemname.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605252219594_addedEntryLocation.WhsCode.cs" />
+    <Compile Include="Migrations\201605252219594_addedEntryLocation.WhsCode.Designer.cs">
+      <DependentUpon>201605252219594_addedEntryLocation.WhsCode.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Production\BoxScanEntry.aspx.cs">
       <DependentUpon>BoxScanEntry.aspx</DependentUpon>
@@ -628,6 +644,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605191533460_addedWhsInv_User.resx">
       <DependentUpon>201605191533460_addedWhsInv_User.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605251913348_addedItem.Itemname.resx">
+      <DependentUpon>201605251913348_addedItem.Itemname.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605252219594_addedEntryLocation.WhsCode.resx">
+      <DependentUpon>201605252219594_addedEntryLocation.WhsCode.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

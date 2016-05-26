@@ -162,82 +162,46 @@ namespace CorralWMS.Transfer
                         ctx.Entry(location).Collection("Boxes").Load();
                         foreach (var box in location.Boxes)
                         {
-                            if (oTransReq.Lines.Count == 1 && oTransReq.Lines.ItemCode == "")
+                            int uom;
+                            using (var cmd = new SqlCommand("SELECT IUoMEntry FROM OITM WHERE ItemCode=@ItemCode", new SqlConnection(Tools.Util.GetSapConnStr())))
                             {
-                                oTransReq.FromWarehouse = transReq.FromWhs;
-                                oTransReq.ToWarehouse = transReq.ToWhs;
+                                cmd.Parameters.Add(new SqlParameter("ItemCode", box.ItemCode));
+                                cmd.Connection.Open();
+                                uom=(int)cmd.ExecuteScalar();
+                            }
+                            //find the item line in the document
+                            int l;
+                            for (l = 0; l < oTransReq.Lines.Count; l++)
+                            {
+                                oTransReq.Lines.SetCurrentLine(l);
+                                if (oTransReq.Lines.ItemCode == box.ItemCode)
+                                    break;//item line found
+                            }
+                            if (l == oTransReq.Lines.Count)
+                            {
+                                //line not found 
+                                if (oTransReq.Lines.ItemCode != "")
+                                    oTransReq.Lines.Add();//non empty line found, add new
+                                //now working on empty line
+                                oTransReq.Lines.FromWarehouseCode = transReq.FromWhs;
                                 oTransReq.Lines.ItemCode = box.ItemCode;
-                                oTransReq.Lines.Quantity = box.Weight;
+                                oTransReq.Lines.UoMEntry = uom;
                                 oTransReq.Lines.WarehouseCode = transReq.ToWhs;
-                                oTransReq.Lines.BatchNumbers.BatchNumber = box.SAPBatch;
-                                oTransReq.Lines.BatchNumbers.Quantity = box.Weight;
-                                oTransReq.Lines.BinAllocations.BinAbsEntry = location.AbsEntry;
-                                oTransReq.Lines.BinAllocations.Quantity = box.Weight;
-                                oTransReq.Lines.BinAllocations.SerialAndBatchNumbersBaseLine = 0;
                             }
-                            else
-                            {
-                                int i;
-                                for (i = 0; i < oTransReq.Lines.Count; i++)
-                                {
-                                    oTransReq.Lines.SetCurrentLine(i);
-                                    if (oTransReq.Lines.ItemCode == box.ItemCode)
-                                        break;//correct line found exit for
-                                }
-                                if (i == oTransReq.Lines.Count)
-                                {
-                                    oTransReq.Lines.Add();
-                                    oTransReq.FromWarehouse = transReq.FromWhs;
-                                    oTransReq.ToWarehouse = transReq.ToWhs;
-                                    oTransReq.Lines.ItemCode = box.ItemCode;
-                                    oTransReq.Lines.Quantity = box.Weight;
-                                    oTransReq.Lines.WarehouseCode = transReq.ToWhs;
-                                    oTransReq.Lines.BatchNumbers.BatchNumber = box.SAPBatch;
-                                    oTransReq.Lines.BatchNumbers.Quantity = box.Weight;
-                                    oTransReq.Lines.BinAllocations.BinAbsEntry = location.AbsEntry;
-                                    oTransReq.Lines.BinAllocations.Quantity = box.Weight;
-                                    oTransReq.Lines.BinAllocations.SerialAndBatchNumbersBaseLine = 0;
-                                }
-                                else
-                                {
-                                    oTransReq.Lines.Quantity += box.Weight;
-                                    int y;
-                                    for (y = 0; y < oTransReq.Lines.BatchNumbers.Count; y++)
-                                    {
-                                        oTransReq.Lines.BatchNumbers.SetCurrentLine(y);
-                                        if (oTransReq.Lines.BatchNumbers.BatchNumber == box.SAPBatch)
-                                            break;//correct batch found exit for
-                                    }
-                                    if (y == oTransReq.Lines.BatchNumbers.Count)
-                                    {
-                                        oTransReq.Lines.BatchNumbers.Add();
-                                        oTransReq.Lines.BatchNumbers.BatchNumber = box.SAPBatch;
-                                        oTransReq.Lines.BatchNumbers.Quantity = box.Weight;
-                                    }
-                                    else
-                                    {
-                                        oTransReq.Lines.BatchNumbers.Quantity += box.Weight;
-                                    }
-                                    for (i = 0; i < oTransReq.Lines.BinAllocations.Count; i++)
-                                    {
-                                        oTransReq.Lines.BinAllocations.SetCurrentLine(i);
-                                        if (oTransReq.Lines.BinAllocations.BinAbsEntry == location.AbsEntry)
-                                            break;//bin allocation found, exit for
-                                    }
-                                    if (i == oTransReq.Lines.BinAllocations.Count)
-                                    {
-                                        oTransReq.Lines.BinAllocations.Add();
-                                        oTransReq.Lines.BinAllocations.BinAbsEntry = location.AbsEntry;
-                                        oTransReq.Lines.BinAllocations.BinActionType = BinActionTypeEnum.batFromWarehouse;
-                                        oTransReq.Lines.BinAllocations.Quantity = box.Weight;
-                                        oTransReq.Lines.BinAllocations.SerialAndBatchNumbersBaseLine = y;
-                                    }
-                                    else
-                                    {
-                                        oTransReq.Lines.BinAllocations.Quantity += box.Weight;
-                                    }
-                                }
-                            }
+                            //now working on initialized line
+                            oTransReq.Lines.Quantity += box.Weight;
+                            oTransReq.Lines.BatchNumbers.SetCurrentLine(0);
+                            if (oTransReq.Lines.BatchNumbers.BatchNumber != "")
+                                oTransReq.Lines.BatchNumbers.Add();
+                            oTransReq.Lines.BatchNumbers.BatchNumber = box.SAPBatch;
+                            oTransReq.Lines.BatchNumbers.Quantity = box.Weight;
+                            oTransReq.Lines.BinAllocations.SetCurrentLine(0);
+                            if (oTransReq.Lines.BinAllocations.BinAbsEntry != 0)
+                                oTransReq.Lines.BinAllocations.Add();
+                            oTransReq.Lines.BinAllocations.BinAbsEntry = location.AbsEntry;
+                            oTransReq.Lines.BinAllocations.BinActionType = BinActionTypeEnum.batFromWarehouse;
+                            oTransReq.Lines.BinAllocations.Quantity += box.Weight;
+                            oTransReq.Lines.BinAllocations.SerialAndBatchNumbersBaseLine = oTransReq.Lines.BatchNumbers.Count - 1;
                         }
                     }
                     if (oTransReq.Add() != 0)

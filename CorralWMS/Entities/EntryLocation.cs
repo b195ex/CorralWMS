@@ -18,6 +18,7 @@ namespace CorralWMS.Entities
         [Required]
         [MaxLength(228)]
         public string BinCode { get; set; }
+        public string WhsCode { get; set; }
         public virtual ProdEntry ProdEntry { get; set; }
         public virtual ICollection<Box> Boxes { get; set; }
     }

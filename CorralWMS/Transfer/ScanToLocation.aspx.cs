@@ -23,8 +23,23 @@ namespace CorralWMS.Transfer
                 var perm = permisos.Where(p => p.Id == 16).FirstOrDefault();
                 if (perm == null)
                     Response.Redirect("~/Default.aspx");
-                else if (Session["CurrTrans"] == null)
-                    Response.Redirect("~/Transfer/ReceiveTrans.aspx");
+                else
+                {
+                    var currtrans = (Entities.Transfer)Session["CurrTrans"];
+                    if (currtrans == null)
+                        Response.Redirect("~/Transfer/ReceiveTrans.aspx");
+                    else
+                    {
+                        using (var ctx = new LWMS_Context())
+                        {
+                            ctx.Entry(currtrans).State = System.Data.Entity.EntityState.Unchanged;
+                            ctx.Entry(currtrans).Reference("TransReq").Load();
+                            FromLabel.Text = currtrans.TransReq.FromWhs;
+                            ToLabel.Text = currtrans.TransReq.ToWhs;
+                            ctx.Entry(currtrans).State = System.Data.Entity.EntityState.Detached;
+                        }
+                    }
+                }
             }
         }
 
@@ -155,14 +170,7 @@ namespace CorralWMS.Transfer
                             }
                         }
                     }
-                    if (oTrans.Update() != 0)
-                    {
-                        int errcod;
-                        string errmess;
-                        oCompany.GetLastError(out errcod, out errmess);
-                        throw new Exception(string.Format("Error al Actualizar Draft, {0}:{1}", errcod, errmess));
-                    }
-                    else if (oTrans.SaveDraftToDocument() != 0)
+                    if (oTrans.SaveDraftToDocument() != 0)
                     {
                         int errcod;
                         string errmess;

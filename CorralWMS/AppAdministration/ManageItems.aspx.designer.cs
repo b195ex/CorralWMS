@@ -7,28 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CorralWMS.Transfer {
+namespace CorralWMS.AppAdministration {
     
     
-    public partial class ScanToLocation {
-        
-        /// <summary>
-        /// FromLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label FromLabel;
-        
-        /// <summary>
-        /// ToLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ToLabel;
+    public partial class ManageItems {
         
         /// <summary>
         /// Alert control.
@@ -49,30 +31,48 @@ namespace CorralWMS.Transfer {
         protected global::System.Web.UI.WebControls.Label ExceptionLabel;
         
         /// <summary>
-        /// BinCodeTxtBox control.
+        /// Button1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox BinCodeTxtBox;
+        protected global::System.Web.UI.WebControls.Button Button1;
         
         /// <summary>
-        /// StartBtn control.
+        /// Panel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button StartBtn;
+        protected global::System.Web.UI.WebControls.Panel Panel1;
         
         /// <summary>
-        /// EndBtn control.
+        /// DurationUpdtPnl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button EndBtn;
+        protected global::System.Web.UI.UpdatePanel DurationUpdtPnl;
+        
+        /// <summary>
+        /// ItemsGrid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView ItemsGrid;
+        
+        /// <summary>
+        /// ItemsDataSrc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.AspNet.EntityDataSource.EntityDataSource ItemsDataSrc;
     }
 }

@@ -5,6 +5,7 @@
             elem.classList.add("collapse");
         }
     </script>
+    <div class="page-header">Recibiendo de almacén <asp:Label ID="FromLabel" runat="server" Text="Origen"> con destino <asp:Label ID="ToLabel" runat="server" Text="Destino"></asp:Label></asp:Label></div>
     <div class="alert alert-danger alert-dismissable collapse" role="alert" id="Alert" runat="server">
         <button type="button" class="close" aria-label="Close" onclick="CloseAlert(<%=Alert.ClientID %>)">
             <span aria-hidden="true">&times;</span>

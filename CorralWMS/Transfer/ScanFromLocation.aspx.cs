@@ -108,12 +108,20 @@ namespace CorralWMS.Transfer
                         ctx.Entry(location).Collection("Boxes").Load();
                         foreach (var box in location.Boxes)
                         {
+                            int uom;
+                            using (var cmd = new SqlCommand("SELECT IUoMEntry FROM OITM WHERE ItemCode=@ItemCode", new SqlConnection(Tools.Util.GetSapConnStr())))
+                            {
+                                cmd.Parameters.Add(new SqlParameter("ItemCode", box.ItemCode));
+                                cmd.Connection.Open();
+                                uom = (int)cmd.ExecuteScalar();
+                            }
                             if (oTransReq.Lines.Count == 1 && oTransReq.Lines.ItemCode == "")
                             {
                                 oTransReq.FromWarehouse = transReq.FromWhs;
                                 oTransReq.ToWarehouse = transReq.ToWhs;
                                 oTransReq.Lines.ItemCode = box.ItemCode;
                                 oTransReq.Lines.Quantity = box.Weight;
+                                oTransReq.Lines.UoMEntry = uom;
                                 oTransReq.Lines.WarehouseCode = transReq.ToWhs;
                                 oTransReq.Lines.BatchNumbers.BatchNumber = box.SAPBatch;
                                 oTransReq.Lines.BatchNumbers.Quantity = box.Weight;
@@ -139,6 +147,7 @@ namespace CorralWMS.Transfer
                                     oTransReq.ToWarehouse = transReq.ToWhs;
                                     oTransReq.Lines.ItemCode = box.ItemCode;
                                     oTransReq.Lines.Quantity = box.Weight;
+                                    oTransReq.Lines.UoMEntry = uom;
                                     oTransReq.Lines.WarehouseCode = transReq.ToWhs;
                                     oTransReq.Lines.BatchNumbers.BatchNumber = box.SAPBatch;
                                     oTransReq.Lines.BatchNumbers.Quantity = box.Weight;

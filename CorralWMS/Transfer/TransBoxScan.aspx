@@ -12,7 +12,7 @@
         <asp:Label ID="ExceptionLabel" runat="server" Text="Label"></asp:Label>
     </div>
     <asp:HyperLink ID="BackLink" runat="server" CssClass="btn btn-primary" NavigateUrl="~/Transfer/ScanToLocation.aspx">Cambiar Ubicación...</asp:HyperLink>
-    <asp:Button ID="Button1" runat="server" Text="Cerrar Traslado" CssClass="btn btn-default pull-right" OnClick="Button1_Click" />
+    <asp:Button ID="Button1" runat="server" Text="Cerrar Traslado" CssClass="btn btn-default pull-right" OnClick="Button1_Click" UseSubmitBehavior="false" />
     <br /><br />
     <div class="row">
         <div class="col-md-6">
@@ -36,7 +36,7 @@
                 <asp:BoundField DataField="Destino" HeaderText="Destino" SortExpression="Destino" />
             </Columns>
         </asp:GridView>
-        <asp:SqlDataSource ID="BoxDataSrc" runat="server" ConnectionString="Data Source=(localdb)\mssqllocaldb;Initial Catalog=CorralWMS.Entities.LWMS_Context;Integrated Security=True" ProviderName="System.Data.SqlClient" 
+        <asp:SqlDataSource ID="BoxDataSrc" runat="server" ConnectionString="<%$ ConnectionStrings:LWMS_Context %>" 
             SelectCommand="SELECT T0.ItemCode Producto, T0.Batch Lote, T0.Id Caja, T0.Weight Peso, T2.BinCode Destino
 FROM Boxes T0
 LEFT JOIN FromLocationBoxes FLB ON FLB.Box_Batch=T0.Batch AND FLB.Box_Id=T0.ID AND FLB.Box_ItemCode=T0.ItemCode

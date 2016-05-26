@@ -1,0 +1,18 @@
+namespace CorralWMS.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class addedEntryLocationWhsCode : DbMigration
+    {
+        public override void Up()
+        {
+            AddColumn("dbo.EntryLocations", "WhsCode", c => c.String());
+        }
+        
+        public override void Down()
+        {
+            DropColumn("dbo.EntryLocations", "WhsCode");
+        }
+    }
+}

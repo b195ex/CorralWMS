@@ -28,6 +28,11 @@ namespace CorralWMS.Production
                 {
                     Response.Redirect("~/Production/ScanLocationEntry.aspx");
                 }
+                else
+                {
+                    var currloc=(EntryLocation)Session["CurrLoc"];
+                    BoxDataSrc.WhereParameters["ProdEntryID"].DefaultValue = currloc.ProdEntryID.ToString();
+                }
             }
         }
 
@@ -73,6 +78,7 @@ namespace CorralWMS.Production
                     ctx.Entry(loc).State = System.Data.Entity.EntityState.Detached;
                 }
                 BoxTxtBox.Text = "";
+                BoxGrid.DataBind();
             }
             catch (Exception ex)
             {
@@ -85,8 +91,6 @@ namespace CorralWMS.Production
         protected void EndBtn_Click(object sender, EventArgs e)
         {
             var entry = (ProdEntry)Session["CurrEntry"];
-            bool firstLine, firstBatch, firstBin;
-            firstLine = firstBatch = firstBin = true;
             try
             {
                 using (var ctx = new LWMS_Context())
@@ -95,86 +99,42 @@ namespace CorralWMS.Production
                     ctx.Entry(entry).Collection("EntryLocations").Load();
                     var oCompany = Tools.SAPSingleton.oCompany;
                     Documents oInvEntry = oCompany.GetBusinessObject(BoObjectTypes.oInventoryGenEntry);
+                    oInvEntry.Comments = "Ingresado por: " + ((User)Session["LoggedInUser"]).Name;
                     var boxes = entry.EntryLocations.SelectMany(el => el.Boxes);
-                    if (entry.BaseEntry != null)
+                    int test = oInvEntry.Lines.BaseEntry;
+                    foreach (var box in boxes)
                     {
-                        //only one line
-                        oInvEntry.Lines.BaseEntry = entry.BaseEntry.Value;
-                        oInvEntry.Lines.BaseType = (int)BoObjectTypes.oProductionOrders;
-                        foreach (var box in boxes)
+                        int linenum;
+                        for (linenum = 0; linenum < oInvEntry.Lines.Count; linenum++)
                         {
-                            oInvEntry.Lines.Quantity+=box.Weight;
-                            if (!firstBatch)
-                            {
-                                oInvEntry.Lines.BatchNumbers.Add();
-                                firstBatch = false;
-                            }
-                            oInvEntry.Lines.BatchNumbers.BatchNumber = box.SAPBatch;
-                            oInvEntry.Lines.BatchNumbers.ExpiryDate = box.ExpDate;
-                            oInvEntry.Lines.BatchNumbers.ManufacturingDate = box.ManufDate.Value;
-                            oInvEntry.Lines.BatchNumbers.Quantity = box.Weight;
-                            if (!firstBin)
-                            {
-                                oInvEntry.Lines.BinAllocations.Add();
-                                firstBin = false;
-                            }
-                            oInvEntry.Lines.BinAllocations.BinAbsEntry = box.EntryLocation.AbsEntry;
-                            oInvEntry.Lines.BinAllocations.Quantity = box.Weight;
-                            oInvEntry.Lines.BinAllocations.SerialAndBatchNumbersBaseLine = oInvEntry.Lines.BatchNumbers.Count - 1;
+                            oInvEntry.Lines.SetCurrentLine(linenum);
+                            if (oInvEntry.Lines.ItemCode == box.ItemCode && oInvEntry.Lines.BaseEntry == (box.EntryLocation.ProdEntry.BaseEntry == null ? 0 : box.EntryLocation.ProdEntry.BaseEntry.Value) && oInvEntry.Lines.WarehouseCode == box.EntryLocation.WhsCode)
+                                break;
                         }
-                    }
-                    else
-                    {
-                        //many lines
-                        foreach (var box in boxes)
+                        if (linenum == oInvEntry.Lines.Count)
                         {
-                            if (firstLine)
-                            {
-                                oInvEntry.Lines.ItemCode = box.ItemCode;
-                                oInvEntry.Lines.Quantity = box.Weight;
-                                oInvEntry.Lines.BatchNumbers.AddmisionDate = DateTime.Today;
-                                oInvEntry.Lines.BatchNumbers.BatchNumber = box.SAPBatch;
-                                oInvEntry.Lines.BatchNumbers.ExpiryDate = box.ExpDate;
-                                oInvEntry.Lines.BatchNumbers.ManufacturingDate = box.ManufDate.Value;
-                                oInvEntry.Lines.BatchNumbers.Quantity = box.Weight;
-                                oInvEntry.Lines.BinAllocations.BinAbsEntry = box.EntryLocation.AbsEntry;
-                                oInvEntry.Lines.BinAllocations.Quantity = box.Weight;
-                                oInvEntry.Lines.BinAllocations.SerialAndBatchNumbersBaseLine = 0;
-                                firstLine=false;
-                            }
-                            else
-                            {
-                                int i;
-                                for (i = 0; i < oInvEntry.Lines.Count; i++)
-                                {
-                                    oInvEntry.Lines.SetCurrentLine(i);
-                                    if (oInvEntry.Lines.ItemCode == box.ItemCode)
-                                        break;
-                                }
-                                if (i == oInvEntry.Lines.Count)
-                                {
-                                    oInvEntry.Lines.Add();
-                                    oInvEntry.Lines.ItemCode = box.ItemCode;
-                                }
-                                oInvEntry.Lines.Quantity += box.Weight;
-                                if (oInvEntry.Lines.BatchNumbers.BatchNumber != "")
-                                    oInvEntry.Lines.BatchNumbers.Add();
-                                oInvEntry.Lines.BatchNumbers.AddmisionDate = DateTime.Today;
-                                oInvEntry.Lines.BatchNumbers.BatchNumber = box.SAPBatch;
-                                oInvEntry.Lines.BatchNumbers.ExpiryDate = box.ExpDate;
-                                oInvEntry.Lines.BatchNumbers.ManufacturingDate = box.ManufDate.Value;
-                                oInvEntry.Lines.BatchNumbers.Quantity = box.Weight;
-                                if (oInvEntry.Lines.BinAllocations.BinAbsEntry != 0)
-                                    oInvEntry.Lines.BinAllocations.Add();
-                                oInvEntry.Lines.BinAllocations.BinAbsEntry = box.EntryLocation.AbsEntry;
-                                oInvEntry.Lines.BinAllocations.Quantity = box.Weight;
-                                oInvEntry.Lines.BinAllocations.SerialAndBatchNumbersBaseLine = oInvEntry.Lines.BatchNumbers.Count - 1;
-                            }
+                            if (oInvEntry.Lines.ItemCode != "")
+                                oInvEntry.Lines.Add();
+                            if (box.EntryLocation.ProdEntry.BaseEntry != null)
+                                oInvEntry.Lines.BaseEntry = box.EntryLocation.ProdEntry.BaseEntry.Value;
+                            oInvEntry.Lines.ItemCode = box.ItemCode;
+                            oInvEntry.Lines.WarehouseCode = box.EntryLocation.WhsCode;
                         }
+                        oInvEntry.Lines.Quantity += box.Weight;
+                        if (oInvEntry.Lines.BatchNumbers.BatchNumber != "")
+                            oInvEntry.Lines.BatchNumbers.Add();
+                        oInvEntry.Lines.BatchNumbers.BatchNumber = box.SAPBatch;
+                        oInvEntry.Lines.BatchNumbers.ExpiryDate = box.ExpDate;
+                        oInvEntry.Lines.BatchNumbers.ManufacturingDate = box.ManufDate.Value;
+                        oInvEntry.Lines.BatchNumbers.Quantity = box.Weight;
+                        if(oInvEntry.Lines.BinAllocations.BinAbsEntry!=0)
+                            oInvEntry.Lines.BinAllocations.Add();
+                        oInvEntry.Lines.BinAllocations.BinAbsEntry = box.EntryLocation.AbsEntry;
+                        oInvEntry.Lines.BinAllocations.Quantity = box.Weight;
+                        oInvEntry.Lines.BinAllocations.SerialAndBatchNumbersBaseLine = oInvEntry.Lines.BatchNumbers.Count - 1;
                     }
                     if (oInvEntry.Add() != 0)
                     {
-                        //error when saving the document to SAP
                         int errCode;
                         string errMsg;
                         oCompany.GetLastError(out errCode, out errMsg);
@@ -197,6 +157,12 @@ namespace CorralWMS.Production
                 ExceptionLabel.Text = ex.Message;
                 Alert.Attributes["class"] = Alert.Attributes["class"].Replace("collapse", "");
             }
+        }
+
+        protected void BoxGrid_PreRender(object sender, EventArgs e)
+        {
+            if (BoxGrid.HeaderRow != null)
+                BoxGrid.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
     }
 }

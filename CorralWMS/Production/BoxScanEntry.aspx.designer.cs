@@ -31,6 +31,15 @@ namespace CorralWMS.Production {
         protected global::System.Web.UI.WebControls.Label ExceptionLabel;
         
         /// <summary>
+        /// HyperLink1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
+        
+        /// <summary>
         /// BoxTxtBox control.
         /// </summary>
         /// <remarks>
@@ -47,6 +56,24 @@ namespace CorralWMS.Production {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button StartBtn;
+        
+        /// <summary>
+        /// BoxGrid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView BoxGrid;
+        
+        /// <summary>
+        /// BoxDataSrc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.AspNet.EntityDataSource.EntityDataSource BoxDataSrc;
         
         /// <summary>
         /// EndBtn control.

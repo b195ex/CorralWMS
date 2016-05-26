@@ -11,6 +11,8 @@ namespace CorralWMS.Entities
         [Key]
         [MaxLength(20)]
         public string ItemCode { get; set; }
+
+        public string ItemName { get; set; }
         
         public Double Duration { get; set; }
     }

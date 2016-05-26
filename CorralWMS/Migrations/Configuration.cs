@@ -27,22 +27,22 @@ namespace CorralWMS.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-            context.SapSettings.AddOrUpdate(p => p.id, 
-                new SapSetting()
-                {
-                    CompanyDB = "SBODEMOCR",
-                    DbPassword = "On3S0lut10ns",
-                    DbServerType = SAPbobsCOM.BoDataServerTypes.dst_MSSQL2012,
-                    DbUserName = "sa",
-                    id = 1,
-                    language = SAPbobsCOM.BoSuppLangs.ln_English,
-                    Password = "1234",
-                    Server = "HNAPP01",
-                    UserName = "manager",
-                    UseTrusted = false,
-                    LicenseServer = "HNAPP01"
-                }
-            );
+            //context.SapSettings.AddOrUpdate(p => p.id, 
+            //    new SapSetting()
+            //    {
+            //        CompanyDB = "SBODEMOCR",
+            //        DbPassword = "On3S0lut10ns",
+            //        DbServerType = SAPbobsCOM.BoDataServerTypes.dst_MSSQL2012,
+            //        DbUserName = "sa",
+            //        id = 1,
+            //        language = SAPbobsCOM.BoSuppLangs.ln_English,
+            //        Password = "1234",
+            //        Server = "HNAPP01",
+            //        UserName = "manager",
+            //        UseTrusted = false,
+            //        LicenseServer = "HNAPP01"
+            //    }
+            //);
             context.Users.AddOrUpdate(u => u.Id, 
                 new User()
                 {

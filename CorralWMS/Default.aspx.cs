@@ -25,6 +25,8 @@ namespace CorralWMS
             try
             {
                 var comp = Tools.SAPSingleton.oCompany;
+                if (comp.Connected)
+                    Label1.Text = "conectado a " + comp.CompanyName;
             }
             catch (Exception ex)
             {

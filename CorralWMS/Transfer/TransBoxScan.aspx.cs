@@ -112,54 +112,60 @@ namespace CorralWMS.Transfer
                     StockTransfer oTrans = oCompany.GetBusinessObject(BoObjectTypes.oStockTransferDraft);
                     oTrans.GetByKey(currTrans.TransReq.DocEntry.Value);
                     var currReq = currTrans.TransReq;
-                    foreach (var toLoc in currTrans.ToLocations)
+                    //ARMAR
+                    var boxes = currTrans.ToLocations.SelectMany(l => l.Boxes).OrderBy(b=>b.ItemCode);
+                    foreach (var box in boxes)
                     {
-                        foreach (var box in toLoc.Boxes)
+                        int linenum;
+                        for (linenum = 0; linenum < oTrans.Lines.Count; linenum++)
                         {
-                            //find the line (through the itemcode)
-                            int i;
-                            for (i = 0; i < oTrans.Lines.Count; i++)
-                            {
-                                oTrans.Lines.SetCurrentLine(i);
-                                if (box.ItemCode == oTrans.Lines.ItemCode)
-                                {
-                                    //line found, find batch
-                                    int bat;
-                                    for (bat = 0; bat < oTrans.Lines.BatchNumbers.Count; bat++)
-                                    {
-                                        oTrans.Lines.BatchNumbers.SetCurrentLine(bat);
-                                        if (box.SAPBatch == oTrans.Lines.BatchNumbers.BatchNumber)
-                                        {
-                                            //batch found, find bin
-                                            int loc;
-                                            for (loc = 0; loc < oTrans.Lines.BinAllocations.Count; loc++)
-                                            {
-                                                oTrans.Lines.BinAllocations.SetCurrentLine(loc);
-                                                if (oTrans.Lines.BinAllocations.BinAbsEntry == toLoc.AbsEntry && oTrans.Lines.BinAllocations.SerialAndBatchNumbersBaseLine == bat)
-                                                {
-                                                    //bin found, add weight
-                                                    oTrans.Lines.BinAllocations.SerialAndBatchNumbersBaseLine = bat;
-                                                    oTrans.Lines.BinAllocations.Quantity += box.Weight;
-                                                    break;
-                                                }
-                                            }
-                                            if (loc == oTrans.Lines.BinAllocations.Count)
-                                            {
-                                                //bin not found, add bin
-                                                oTrans.Lines.BinAllocations.Add();
-                                                oTrans.Lines.BinAllocations.BinAbsEntry = toLoc.AbsEntry;
-                                                oTrans.Lines.BinAllocations.BinActionType = BinActionTypeEnum.batToWarehouse;
-                                                oTrans.Lines.BinAllocations.Quantity = box.Weight;
-                                                oTrans.Lines.BinAllocations.SerialAndBatchNumbersBaseLine = bat;
-                                            }
-                                            break;
-                                        }
-                                    }
-                                    break;
-                                }
-                            }
+                            oTrans.Lines.SetCurrentLine(linenum);
+                            if (oTrans.Lines.ItemCode == box.ItemCode)
+                                break;
                         }
+                        int batchlinenum;
+                        for (batchlinenum = 0; batchlinenum < oTrans.Lines.BatchNumbers.Count; batchlinenum++)
+                        {
+                            oTrans.Lines.BatchNumbers.SetCurrentLine(batchlinenum);
+                            if (oTrans.Lines.BatchNumbers.BatchNumber == box.SAPBatch)
+                                break;
+                        }
+                        int i;
+                        for (i = 0; i < oTrans.Lines.BinAllocations.Count; i++)
+                        {
+                            oTrans.Lines.BinAllocations.SetCurrentLine(i);
+                            if (oTrans.Lines.BinAllocations.BinAbsEntry == box.ToLocations.First(tl => tl.TransferId == currReq.Id).AbsEntry && oTrans.Lines.BinAllocations.SerialAndBatchNumbersBaseLine == batchlinenum)
+                                break;
+                        }
+                        if (i == oTrans.Lines.BinAllocations.Count)
+                            oTrans.Lines.BinAllocations.Add();
+                        oTrans.Lines.BinAllocations.BinAbsEntry = box.ToLocations.First(tl => tl.TransferId == currTrans.Id).AbsEntry;
+                        oTrans.Lines.BinAllocations.BinActionType = BinActionTypeEnum.batToWarehouse;
+                        oTrans.Lines.BinAllocations.Quantity = box.Weight;
+                        oTrans.Lines.BinAllocations.SerialAndBatchNumbersBaseLine = batchlinenum;
                     }
+                    //FIN ARMAR
+                    //for (int l = 0; l < oTrans.Lines.Count; l++)
+                    //{
+                    //    oTrans.Lines.SetCurrentLine(l);
+                    //    string item = oTrans.Lines.ItemCode;
+                    //    string from = oTrans.Lines.FromWarehouseCode;
+                    //    string to = oTrans.Lines.WarehouseCode;
+                    //    double amnt = oTrans.Lines.Quantity;
+                    //    for (int b = 0; b < oTrans.Lines.BatchNumbers.Count; b++)
+                    //    {
+                    //        oTrans.Lines.BatchNumbers.SetCurrentLine(b);
+                    //        string bat = oTrans.Lines.BatchNumbers.BatchNumber;
+                    //    }
+                    //    for (int c = 0; c < oTrans.Lines.BinAllocations.Count; c++)
+                    //    {
+                    //        oTrans.Lines.BatchNumbers.SetCurrentLine(c);
+                    //        int binabs = oTrans.Lines.BinAllocations.BinAbsEntry;
+                    //        BinActionTypeEnum binact = oTrans.Lines.BinAllocations.BinActionType;
+                    //        double bnamnt = oTrans.Lines.BinAllocations.Quantity;
+                    //        int basebatch = oTrans.Lines.BinAllocations.SerialAndBatchNumbersBaseLine;
+                    //    }
+                    //}
                     if (oTrans.Update() != 0)
                     {
                         int errcod;
@@ -167,7 +173,7 @@ namespace CorralWMS.Transfer
                         oCompany.GetLastError(out errcod, out errmess);
                         throw new Exception(string.Format("Error al Actualizar Draft, {0}:{1}", errcod, errmess));
                     }
-                    else if (oTrans.SaveDraftToDocument() != 0)
+                    if (oTrans.SaveDraftToDocument() != 0)
                     {
                         int errcod;
                         string errmess;
