@@ -59,6 +59,7 @@
                         <li><asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Transfer/StartTransferReq.aspx" OnLoad="Control_Load" reqperm="15">Crear Transferencia</asp:HyperLink></li>
                         <li><asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Transfer/ReceiveTrans.aspx" OnLoad="Control_Load" reqperm="16">Recibir Transferencia</asp:HyperLink></li>
                         <li><asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/CycleCounts/DoCycleCount.aspx" OnLoad="Control_Load" reqperm="24">Inventario Cíclico</asp:HyperLink></li>
+                        <li><asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/BinAudits/ScanAuditBin.aspx" OnLoad="Control_Load" reqperm="29">Auditoría de Ubicación</asp:HyperLink></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>

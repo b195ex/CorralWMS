@@ -171,6 +171,7 @@ namespace CorralWMS.CycleCounts
                 {
                     ctx.Entry(currcount).State = System.Data.Entity.EntityState.Unchanged;
                     ctx.Entry(currcount).Collection("Boxes").Load();
+                    ctx.Entry(currcount).Reference("User").Load();
                     var oCompany = Tools.SAPSingleton.oCompany;
                     InventoryCountingsService oICS = oCompany.GetCompanyService().GetBusinessService(ServiceTypes.InventoryCountingsService);
                     InventoryCounting oIC = oICS.GetDataInterface(InventoryCountingsServiceDataInterfaces.icsInventoryCounting);
@@ -178,16 +179,25 @@ namespace CorralWMS.CycleCounts
                     oIC.CountingType = CountingTypeEnum.ctSingleCounter;
                     oIC.Remarks = string.Format("Inventario cíclico de ubicación {0}, realizado por {1}", currcount.BinCode, currcount.User.Name);
                     ctx.Entry(currcount).Collection("Boxes").Load();
-                    foreach (var box in currcount.Boxes.OrderBy(b=>b.ItemCode))
+                    foreach (var box in currcount.Boxes.OrderBy(b => b.ItemCode))
                     {
-                        InventoryCountingLine oICL=null;
+                        InventoryCountingLine oICL = null;
                         if (oIC.InventoryCountingLines.Count == 0)
                         {
+                            string uom;
+                            using (var cmd = new SqlCommand("SELECT UomCode FROM OITM LEFT JOIN OUOM ON IUoMEntry=UomEntry WHERE ItemCode=@ItemCode", new SqlConnection(Tools.Util.GetSapConnStr())))
+                            {
+                                cmd.Parameters.Add(new SqlParameter("Itemcode", box.ItemCode));
+                                cmd.Connection.Open();
+                                uom = (string)cmd.ExecuteScalar();
+                            }
                             oICL = oIC.InventoryCountingLines.Add();
                             oICL.BinEntry = currcount.BinEntry;
                             oICL.Counted = BoYesNoEnum.tYES;
                             oICL.ItemCode = box.ItemCode;
+                            oICL.UoMCode = uom;
                             oICL.WarehouseCode = sql;
+                            oICL.CountedQuantity = 0;
                         }
                         else
                         {
@@ -200,26 +210,33 @@ namespace CorralWMS.CycleCounts
                             }
                             if (i == oIC.InventoryCountingLines.Count)
                             {
+                                string uom;
+                                using (var cmd = new SqlCommand("SELECT UomCode FROM OITM LEFT JOIN OUOM ON IUoMEntry=UomEntry WHERE ItemCode=@ItemCode", new SqlConnection(Tools.Util.GetSapConnStr())))
+                                {
+                                    cmd.Parameters.Add(new SqlParameter("Itemcode", box.ItemCode));
+                                    cmd.Connection.Open();
+                                    uom = (string)cmd.ExecuteScalar();
+                                }
                                 oICL = oIC.InventoryCountingLines.Add();
                                 oICL.BinEntry = currcount.BinEntry;
                                 oICL.Counted = BoYesNoEnum.tYES;
                                 oICL.ItemCode = box.ItemCode;
+                                oICL.UoMCode = uom;
                                 oICL.WarehouseCode = sql;
                             }
                         }
                         oICL.CountedQuantity += box.Weight;
-                        var oICBN=oICL.InventoryCountingBatchNumbers.Add();
+                        var oICBN = oICL.InventoryCountingBatchNumbers.Add();
                         oICBN.BatchNumber = box.SAPBatch;
                         oICBN.Quantity = box.Weight;
                     }
                     var oICP = oICS.Add(oIC);
-                    oICS.Close(oICP);
-                    
+                    //oICS.Close(oICP);
                     currcount.Closed = true;
                     ctx.SaveChanges();
-                    Session.Remove("CurrCount");
-                    Response.Redirect("~/Default.aspx");
                 }
+                Session.Remove("CurrCount");
+                Response.Redirect("~/Default.aspx");
             }
             catch (Exception ex)
             {

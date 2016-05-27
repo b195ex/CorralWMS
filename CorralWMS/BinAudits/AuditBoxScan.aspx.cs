@@ -2,6 +2,7 @@
 using SAPbobsCOM;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -118,12 +119,12 @@ namespace CorralWMS.BinAudits
                 {
                     ctx.Entry(curraudit).State = System.Data.Entity.EntityState.Unchanged;
                     ctx.Entry(curraudit).Collection("Boxes").Load();
+                    ctx.Entry(curraudit).Reference("User").Load();
                     var oCompany = Tools.SAPSingleton.oCompany;
                     InventoryCountingsService oICS = oCompany.GetCompanyService().GetBusinessService(ServiceTypes.InventoryCountingsService);
                     InventoryCounting oIC = oICS.GetDataInterface(InventoryCountingsServiceDataInterfaces.icsInventoryCounting);
                     oIC.CountDate = DateTime.Today;
                     oIC.CountingType = CountingTypeEnum.ctSingleCounter;
-                    ctx.Entry(curraudit).Reference("User").Load();
                     oIC.Remarks = string.Format("Auditoría de ubicación {0}, realizado por {1}", curraudit.BinCode, curraudit.User.Name);
                     ctx.Entry(curraudit).Collection("Boxes").Load();
                     foreach (var box in curraudit.Boxes.OrderBy(b => b.ItemCode))
@@ -131,10 +132,18 @@ namespace CorralWMS.BinAudits
                         InventoryCountingLine oICL = null;
                         if (oIC.InventoryCountingLines.Count == 0)
                         {
+                            string uom;
+                            using (var cmd = new SqlCommand("SELECT UomCode FROM OITM LEFT JOIN OUOM ON IUoMEntry=UomEntry WHERE ItemCode=@ItemCode", new SqlConnection(Tools.Util.GetSapConnStr())))
+                            {
+                                cmd.Parameters.Add(new SqlParameter("Itemcode", box.ItemCode));
+                                cmd.Connection.Open();
+                                uom = (string)cmd.ExecuteScalar();
+                            }
                             oICL = oIC.InventoryCountingLines.Add();
                             oICL.BinEntry = curraudit.BinEntry;
                             oICL.Counted = BoYesNoEnum.tYES;
                             oICL.ItemCode = box.ItemCode;
+                            oICL.UoMCode = uom;
                             oICL.WarehouseCode = curraudit.WhsCode;
                             oICL.CountedQuantity = 0;
                         }
@@ -149,10 +158,18 @@ namespace CorralWMS.BinAudits
                             }
                             if (i == oIC.InventoryCountingLines.Count)
                             {
+                                string uom;
+                                using (var cmd = new SqlCommand("SELECT UomCode FROM OITM LEFT JOIN OUOM ON IUoMEntry=UomEntry WHERE ItemCode=@ItemCode", new SqlConnection(Tools.Util.GetSapConnStr())))
+                                {
+                                    cmd.Parameters.Add(new SqlParameter("Itemcode", box.ItemCode));
+                                    cmd.Connection.Open();
+                                    uom = (string)cmd.ExecuteScalar();
+                                }
                                 oICL = oIC.InventoryCountingLines.Add();
                                 oICL.BinEntry = curraudit.BinEntry;
                                 oICL.Counted = BoYesNoEnum.tYES;
                                 oICL.ItemCode = box.ItemCode;
+                                oICL.UoMCode = uom;
                                 oICL.WarehouseCode = curraudit.WhsCode;
                             }
                         }
@@ -162,7 +179,7 @@ namespace CorralWMS.BinAudits
                         oICBN.Quantity = box.Weight;
                     }
                     var oICP = oICS.Add(oIC);
-                    oICS.Close(oICP);
+                    //oICS.Close(oICP);
                     curraudit.EndDate = DateTime.Now;
                     ctx.SaveChanges();
                 }
