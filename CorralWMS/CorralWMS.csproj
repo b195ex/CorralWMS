@@ -118,10 +118,12 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="AppAdministration\ManageCriticLocations.aspx" />
+    <Content Include="AppAdministration\ManageCustomers.aspx" />
     <Content Include="AppAdministration\ManageItems.aspx" />
     <Content Include="AppAdministration\ManageMailingLists.aspx" />
     <Content Include="AppAdministration\ManagePermissions.aspx" />
     <Content Include="AppAdministration\ManageRoles.aspx" />
+    <Content Include="AppAdministration\ManageRoutes.aspx" />
     <Content Include="AppAdministration\ManageSAP.aspx" />
     <Content Include="AppAdministration\ManageSettings.aspx" />
     <Content Include="AppAdministration\ManageSysMail.aspx" />
@@ -168,7 +170,10 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="CycleCounts\DoCycleCount.aspx" />
+    <Content Include="Dispatching\FillOrder.aspx" />
+    <Content Include="Dispatching\OrderPreview.aspx" />
     <Content Include="Dispatching\Orders.aspx" />
+    <Content Include="Dispatching\ScanLoc.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Images\DelCorralLogo-neg.png" />
     <Content Include="Images\DelCorralLogo.png" />
@@ -265,6 +270,13 @@
     <Compile Include="AppAdministration\ManageCriticLocations.aspx.designer.cs">
       <DependentUpon>ManageCriticLocations.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AppAdministration\ManageCustomers.aspx.cs">
+      <DependentUpon>ManageCustomers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AppAdministration\ManageCustomers.aspx.designer.cs">
+      <DependentUpon>ManageCustomers.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AppAdministration\ManageItems.aspx.cs">
       <DependentUpon>ManageItems.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -292,6 +304,13 @@
     </Compile>
     <Compile Include="AppAdministration\ManageRoles.aspx.designer.cs">
       <DependentUpon>ManageRoles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AppAdministration\ManageRoutes.aspx.cs">
+      <DependentUpon>ManageRoutes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AppAdministration\ManageRoutes.aspx.designer.cs">
+      <DependentUpon>ManageRoutes.aspx</DependentUpon>
     </Compile>
     <Compile Include="AppAdministration\ManageSAP.aspx.cs">
       <DependentUpon>ManageSAP.aspx</DependentUpon>
@@ -368,6 +387,20 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Dispatching\FillOrder.aspx.cs">
+      <DependentUpon>FillOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dispatching\FillOrder.aspx.designer.cs">
+      <DependentUpon>FillOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dispatching\OrderPreview.aspx.cs">
+      <DependentUpon>OrderPreview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dispatching\OrderPreview.aspx.designer.cs">
+      <DependentUpon>OrderPreview.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Dispatching\Orders.aspx.cs">
       <DependentUpon>Orders.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -375,9 +408,17 @@
     <Compile Include="Dispatching\Orders.aspx.designer.cs">
       <DependentUpon>Orders.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Dispatching\ScanLoc.aspx.cs">
+      <DependentUpon>ScanLoc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dispatching\ScanLoc.aspx.designer.cs">
+      <DependentUpon>ScanLoc.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Entities\AppSetting.cs" />
     <Compile Include="Entities\BinAudit.cs" />
     <Compile Include="Entities\Box.cs" />
+    <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\CriticLocation.cs" />
     <Compile Include="Entities\CycleCount.cs" />
     <Compile Include="Entities\EntryLocation.cs" />
@@ -387,9 +428,12 @@
     <Compile Include="Entities\LWMS_Context.cs" />
     <Compile Include="Entities\MailingList.cs" />
     <Compile Include="Entities\MailSetting.cs" />
+    <Compile Include="Entities\Order.cs" />
+    <Compile Include="Entities\OrdrDtl.cs" />
     <Compile Include="Entities\Permission.cs" />
     <Compile Include="Entities\ProdEntry.cs" />
     <Compile Include="Entities\Role.cs" />
+    <Compile Include="Entities\Route.cs" />
     <Compile Include="Entities\SapSetting.cs" />
     <Compile Include="Entities\ToLocations.cs" />
     <Compile Include="Entities\Transfer.cs" />
@@ -501,6 +545,14 @@
     <Compile Include="Migrations\201605252219594_addedEntryLocation.WhsCode.cs" />
     <Compile Include="Migrations\201605252219594_addedEntryLocation.WhsCode.Designer.cs">
       <DependentUpon>201605252219594_addedEntryLocation.WhsCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606181415018_addedRoutes.cs" />
+    <Compile Include="Migrations\201606181415018_addedRoutes.Designer.cs">
+      <DependentUpon>201606181415018_addedRoutes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606191924319_added_OrdrDtl_WhsCod.cs" />
+    <Compile Include="Migrations\201606191924319_added_OrdrDtl_WhsCod.Designer.cs">
+      <DependentUpon>201606191924319_added_OrdrDtl_WhsCod.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Production\BoxScanEntry.aspx.cs">
@@ -650,6 +702,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605252219594_addedEntryLocation.WhsCode.resx">
       <DependentUpon>201605252219594_addedEntryLocation.WhsCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606181415018_addedRoutes.resx">
+      <DependentUpon>201606181415018_addedRoutes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606191924319_added_OrdrDtl_WhsCod.resx">
+      <DependentUpon>201606191924319_added_OrdrDtl_WhsCod.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

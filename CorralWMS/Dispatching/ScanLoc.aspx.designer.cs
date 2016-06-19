@@ -10,7 +10,16 @@
 namespace CorralWMS.Dispatching {
     
     
-    public partial class Orders {
+    public partial class ScanLoc {
+        
+        /// <summary>
+        /// OrdrLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label OrdrLabel;
         
         /// <summary>
         /// Alert control.
@@ -31,21 +40,39 @@ namespace CorralWMS.Dispatching {
         protected global::System.Web.UI.WebControls.Label ExceptionLabel;
         
         /// <summary>
-        /// OrdersGrid control.
+        /// BinCodeTxtBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView OrdersGrid;
+        protected global::System.Web.UI.WebControls.TextBox BinCodeTxtBox;
         
         /// <summary>
-        /// OrdrsDataSrc control.
+        /// StartBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Microsoft.AspNet.EntityDataSource.EntityDataSource OrdrsDataSrc;
+        protected global::System.Web.UI.WebControls.Button StartBtn;
+        
+        /// <summary>
+        /// InvBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button InvBtn;
+        
+        /// <summary>
+        /// DlvrBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button DlvrBtn;
     }
 }

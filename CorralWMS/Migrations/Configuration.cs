@@ -80,7 +80,7 @@ namespace CorralWMS.Migrations
                 new Permission() { Description = "Acceso a ManageUsers", Id = 8 },
                 new Permission() { Description = "Acceso a ver Inventarios de Almacén", Id = 32 },
                 new Permission() { Description = "Cierre de Inventarios de almacén", Id = 31 },
-                new Permission() { Description = "Creación de inventarios de Almacé", Id = 30 },
+                new Permission() { Description = "Creación de inventarios de Almacén", Id = 30 },
                 new Permission() { Description = "Creación de Permisos", Id = 2 },
                 new Permission() { Description = "Creación de Roles", Id = 3 },
                 new Permission() { Description = "Creación de Settings", Id = 11 },
@@ -102,7 +102,11 @@ namespace CorralWMS.Migrations
                 new Permission() { Description = "Realizar Auditoria de Ubicación", Id = 29 },
                 new Permission() { Description = "Realizar Inventario Cíclico", Id = 24 },
                 new Permission() { Description = "Realizar Inventario de Ubicación", Id = 33 },
-                new Permission() { Description = "Recibir transferencia", Id = 16 }
+                new Permission() { Description = "Recibir transferencia", Id = 16 },
+                new Permission() { Description = "LLenar Pedido", Id = 34 },
+                new Permission() { Description = "Crear Ruta", Id = 35 },
+                new Permission() { Description = "Sincronizar Clientes", Id = 36 },
+                new Permission() { Description = "Sincronizar Productos", Id = 37 }
             );
         }
     }

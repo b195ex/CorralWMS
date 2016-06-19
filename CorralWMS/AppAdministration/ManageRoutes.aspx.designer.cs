@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CorralWMS.Dispatching {
+namespace CorralWMS.AppAdministration {
     
     
-    public partial class Orders {
+    public partial class ManageRoutes {
         
         /// <summary>
         /// Alert control.
@@ -31,21 +31,39 @@ namespace CorralWMS.Dispatching {
         protected global::System.Web.UI.WebControls.Label ExceptionLabel;
         
         /// <summary>
-        /// OrdersGrid control.
+        /// RtTxtBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView OrdersGrid;
+        protected global::System.Web.UI.WebControls.TextBox RtTxtBox;
         
         /// <summary>
-        /// OrdrsDataSrc control.
+        /// AddBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Microsoft.AspNet.EntityDataSource.EntityDataSource OrdrsDataSrc;
+        protected global::System.Web.UI.WebControls.Button AddBtn;
+        
+        /// <summary>
+        /// RtGrid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView RtGrid;
+        
+        /// <summary>
+        /// RtDataSrc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.AspNet.EntityDataSource.EntityDataSource RtDataSrc;
     }
 }

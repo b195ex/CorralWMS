@@ -39,5 +39,6 @@ namespace CorralWMS.Entities
         public virtual ICollection<CycleCount> CycleCounts { get; set; }
         public virtual ICollection<BinAudit> BinAudits { get; set; }
         public virtual ICollection<LocInv> LocInvs { get; set; }
+        public virtual OrdrDtl OrdrDtl { get; set; }
     }
 }

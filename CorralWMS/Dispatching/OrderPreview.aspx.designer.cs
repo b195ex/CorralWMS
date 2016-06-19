@@ -10,42 +10,42 @@
 namespace CorralWMS.Dispatching {
     
     
-    public partial class Orders {
+    public partial class OrderPreview {
         
         /// <summary>
-        /// Alert control.
+        /// OrdrView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Alert;
+        protected global::System.Web.UI.WebControls.DetailsView OrdrView;
         
         /// <summary>
-        /// ExceptionLabel control.
+        /// OrdrDataSrc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ExceptionLabel;
+        protected global::Microsoft.AspNet.EntityDataSource.EntityDataSource OrdrDataSrc;
         
         /// <summary>
-        /// OrdersGrid control.
+        /// DtlGrid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView OrdersGrid;
+        protected global::System.Web.UI.WebControls.GridView DtlGrid;
         
         /// <summary>
-        /// OrdrsDataSrc control.
+        /// DtlDataSrc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Microsoft.AspNet.EntityDataSource.EntityDataSource OrdrsDataSrc;
+        protected global::Microsoft.AspNet.EntityDataSource.EntityDataSource DtlDataSrc;
     }
 }

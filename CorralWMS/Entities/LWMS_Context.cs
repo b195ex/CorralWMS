@@ -29,5 +29,9 @@ namespace CorralWMS.Entities
         public virtual DbSet<BinAudit> BinAudits { get; set; }
         public virtual DbSet<WhsInv> WhsInvs { get; set; }
         public virtual DbSet<LocInv> LocInvs { get; set; }
+        public virtual DbSet<Route> Routes { get; set; }
+        public virtual DbSet<Client> Clients { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrdrDtl> OrdrDtls { get; set; }
     }
 }

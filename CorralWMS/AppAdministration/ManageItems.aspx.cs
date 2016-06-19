@@ -32,7 +32,7 @@ namespace CorralWMS.AppAdministration
         {
             if (!Alert.Attributes["class"].Contains("collapse"))
                 Alert.Attributes["class"] += "collapse";
-            string sql = "SELECT ItemCode, ItemName FROM OITM WHERE (ItemCode LIKE 'C%' OR ItemCode LIKE 'R%') and SellItem='Y'";
+            string sql = "SELECT ItemCode, ItemName FROM OITM WHERE SellItem='Y' AND ItmsGrpCod NOT IN (116,117,120,121,122,123,124,125,126,127,129)";
             try
             {
                 using (var ctx = new LWMS_Context())

@@ -138,11 +138,20 @@ namespace CorralWMS.Inventories
                                     InventoryCountingLine oICL = null;
                                     if (oIC.InventoryCountingLines.Count == 0)
                                     {
+                                        string uom;
+                                        using (var cmd = new SqlCommand("SELECT UomCode FROM OITM LEFT JOIN OUOM ON IUoMEntry=UomEntry WHERE ItemCode=@ItemCode", new SqlConnection(Tools.Util.GetSapConnStr())))
+                                        {
+                                            cmd.Parameters.Add(new SqlParameter("Itemcode", box.ItemCode));
+                                            cmd.Connection.Open();
+                                            uom = (string)cmd.ExecuteScalar();
+                                        }
                                         oICL = oIC.InventoryCountingLines.Add();
                                         oICL.BinEntry = loc.BinAbs;
                                         oICL.Counted = BoYesNoEnum.tYES;
                                         oICL.ItemCode = box.ItemCode;
+                                        oICL.UoMCode = uom;
                                         oICL.WarehouseCode = inv.WhsCode;
+                                        oICL.CountedQuantity = 0;
                                     }
                                     else
                                     {
@@ -155,10 +164,18 @@ namespace CorralWMS.Inventories
                                         }
                                         if (i == oIC.InventoryCountingLines.Count)
                                         {
+                                            string uom;
+                                            using (var cmd = new SqlCommand("SELECT UomCode FROM OITM LEFT JOIN OUOM ON IUoMEntry=UomEntry WHERE ItemCode=@ItemCode", new SqlConnection(Tools.Util.GetSapConnStr())))
+                                            {
+                                                cmd.Parameters.Add(new SqlParameter("Itemcode", box.ItemCode));
+                                                cmd.Connection.Open();
+                                                uom = (string)cmd.ExecuteScalar();
+                                            }
                                             oICL = oIC.InventoryCountingLines.Add();
-                                            oICL.BinEntry = loc.BinAbs;
+                                            oICL. BinEntry = loc.BinAbs;
                                             oICL.Counted = BoYesNoEnum.tYES;
                                             oICL.ItemCode = box.ItemCode;
+                                            oICL.UoMCode = uom;
                                             oICL.WarehouseCode = inv.WhsCode;
                                         }
                                     }
@@ -169,7 +186,7 @@ namespace CorralWMS.Inventories
                                 }
                                 var oICP = oICS.Add(oIC);
                                 inv.DocEntry = oICP.DocumentEntry;
-                                oICS.Close(oICP);
+                                //oICS.Close(oICP);
                             }
                             inv.EndDate = DateTime.Now;
                             ctx.SaveChanges();

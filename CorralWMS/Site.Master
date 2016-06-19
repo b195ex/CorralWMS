@@ -50,6 +50,9 @@
                         <li><asp:HyperLink ID="ManageSAP" runat="server" NavigateUrl="~/AppAdministration/ManageSAP.aspx" OnLoad="Control_Load" reqperm="14">Gestión de Parámetros SAP</asp:HyperLink></li>
                         <li><asp:HyperLink ID="ManageUsersNavLink" runat="server" NavigateUrl="~/AppAdministration/ManageUsers.aspx" OnLoad="Control_Load" reqperm="8">Gestión de Usuarios</asp:HyperLink></li>
                         <li><asp:HyperLink ID="ManageRolesNavLink" runat="server" NavigateUrl="~/AppAdministration/ManageRoles.aspx" OnLoad="Control_Load" reqperm="9">Gestión de Roles</asp:HyperLink></li>
+                        <li><asp:HyperLink ID="HyperLink10" runat="server" NavigateUrl="~/AppAdministration/ManageRoutes.aspx" OnLoad="Control_Load" reqperm="35">Gestión de Rutas</asp:HyperLink></li>
+                        <li><asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/AppAdministration/ManageCustomers.aspx" OnLoad="Control_Load" reqperm="36">Sincronizar Clientes</asp:HyperLink></li>
+                        <li><asp:HyperLink ID="HyperLink13" runat="server" NavigateUrl="~/AppAdministration/ManageItems.aspx" OnLoad="Control_Load" reqperm="36">Sincronizar Productos</asp:HyperLink></li>
                         <li><asp:HyperLink ID="ManagePermissions" runat="server" NavigateUrl="~/AppAdministration/ManagePermissions.aspx" OnLoad="Control_Load" reqperm="7">Gestión de Permisos</asp:HyperLink></li>
                         <li><asp:HyperLink ID="ManageSysMailLink" runat="server" NavigateUrl="~/AppAdministration/ManageSysMail.aspx" OnLoad="Control_Load" reqperm="19">Gestión de Correo de Sistema</asp:HyperLink></li>
                         <li><asp:HyperLink ID="ManageMailingListsLink" runat="server" NavigateUrl="~/AppAdministration/ManageMailingLists.aspx" OnLoad="Control_Load" reqperm="20">Gestión de listas de Correo</asp:HyperLink></li>
@@ -58,6 +61,9 @@
                         <li><asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Production/GoodsReceipt.aspx" OnLoad="Control_Load" reqperm="23">Ingreso de Producción</asp:HyperLink></li>
                         <li><asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Transfer/StartTransferReq.aspx" OnLoad="Control_Load" reqperm="15">Crear Transferencia</asp:HyperLink></li>
                         <li><asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Transfer/ReceiveTrans.aspx" OnLoad="Control_Load" reqperm="16">Recibir Transferencia</asp:HyperLink></li>
+                        <li><asp:HyperLink ID="HyperLink12" runat="server" NavigateUrl="~/Dispatching/Orders.aspx" OnLoad="Control_Load" reqperm="34">Despacho</asp:HyperLink></li>
+                        <li><asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="~/Inventories/StartInventory.aspx" OnLoad="Control_Load" reqperm="32">Inventario de Almacén</asp:HyperLink></li>
+                        <li><asp:HyperLink ID="HyperLink9" runat="server" NavigateUrl="~/Inventories/ScanBin.aspx" OnLoad="Control_Load" reqperm="33">Inventariar Ubicación</asp:HyperLink></li>
                         <li><asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/CycleCounts/DoCycleCount.aspx" OnLoad="Control_Load" reqperm="24">Inventario Cíclico</asp:HyperLink></li>
                         <li><asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/BinAudits/ScanAuditBin.aspx" OnLoad="Control_Load" reqperm="29">Auditoría de Ubicación</asp:HyperLink></li>
                     </ul>

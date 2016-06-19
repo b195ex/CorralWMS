@@ -38,6 +38,8 @@ namespace CorralWMS.Production
 
         protected void StartBtn_Click(object sender, EventArgs e)
         {
+            if (!Alert.Attributes["class"].Contains("collapse"))
+                Alert.Attributes["class"] += "collapse";
             if (string.IsNullOrWhiteSpace(BoxTxtBox.Text)) 
                 return;
             try

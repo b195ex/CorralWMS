@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CorralWMS.Dispatching {
+namespace CorralWMS.AppAdministration {
     
     
-    public partial class Orders {
+    public partial class ManageCustomers {
         
         /// <summary>
         /// Alert control.
@@ -31,21 +31,48 @@ namespace CorralWMS.Dispatching {
         protected global::System.Web.UI.WebControls.Label ExceptionLabel;
         
         /// <summary>
-        /// OrdersGrid control.
+        /// SyncBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView OrdersGrid;
+        protected global::System.Web.UI.WebControls.Button SyncBtn;
         
         /// <summary>
-        /// OrdrsDataSrc control.
+        /// Panel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Microsoft.AspNet.EntityDataSource.EntityDataSource OrdrsDataSrc;
+        protected global::System.Web.UI.WebControls.Panel Panel1;
+        
+        /// <summary>
+        /// ClientsGrid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView ClientsGrid;
+        
+        /// <summary>
+        /// RouteDataSrc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.AspNet.EntityDataSource.EntityDataSource RouteDataSrc;
+        
+        /// <summary>
+        /// ClientsDataSrc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.AspNet.EntityDataSource.EntityDataSource ClientsDataSrc;
     }
 }
