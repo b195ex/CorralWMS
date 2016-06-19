@@ -147,6 +147,8 @@ namespace CorralWMS.Dispatching
             try
             {
                 CreateDocument(false);
+                Session.Remove("CurrOrder");
+                Response.Redirect("~/Dispatching/Orders.aspx");
             }
             catch (Exception ex)
             {
