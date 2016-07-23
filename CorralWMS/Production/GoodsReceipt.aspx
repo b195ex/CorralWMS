@@ -14,7 +14,7 @@
                 <asp:Label ID="ExceptionLabel" runat="server" Text="Label"></asp:Label>
             </div>
             <div class="table-responsive">
-                <asp:GridView ID="ProdOrdrGrid" runat="server" AutoGenerateColumns="False" CssClass="table table-striped" DataKeyNames="DocNum" DataSourceID="ProdOrdrDataSrc" GridLines="None" OnPreRender="ProdOrdrGrid_PreRender" OnSelectedIndexChanging="ProdOrdrGrid_SelectedIndexChanging">
+                <asp:GridView ID="ProdOrdrGrid" runat="server" AutoGenerateColumns="False" CssClass="table table-striped" DataKeyNames="DocEntry" DataSourceID="ProdOrdrDataSrc" GridLines="None" OnPreRender="ProdOrdrGrid_PreRender" OnSelectedIndexChanging="ProdOrdrGrid_SelectedIndexChanging">
                     <Columns>
                         <asp:BoundField DataField="DocNum" HeaderText="# Orden" />
                         <asp:BoundField DataField="ItemCode" HeaderText="Cod. Artículo" />
