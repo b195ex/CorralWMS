@@ -97,7 +97,7 @@ namespace CorralWMS.Dispatching
                     var dtl = ordr.OrdrDtls.FirstOrDefault(d => d.ItemCode == itmcod);
                     if (dtl == null)
                         throw new Exception("El pedido no contiene ese artículo");
-                    if (dtl.Boxes.Sum(b => b.Weight) > dtl.Quantity)
+                    if (dtl.Boxes.Sum(b => b.Weight)+wt > dtl.Quantity)
                         throw new Exception("Ya se sobrepasó la cantidad requerida de este producto.");
                     var xob = ctx.Boxes.FirstOrDefault(b => b.Batch == batch && b.Id == boxid && b.ItemCode == itmcod);
                     if (xob == null)
